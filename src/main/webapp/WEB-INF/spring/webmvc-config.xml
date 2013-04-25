@@ -26,10 +26,11 @@
     
     <!-- Register "global" interceptor beans to apply to all registered HandlerMappings -->
     <!-- Going to use an interceptor to verify authentication token -->
-    <!--
     <mvc:interceptors>
-        
+        <mvc:interceptor>
+            <mvc:mapping path="/api/v*/secure/*"/>
+            <bean class="org.alessiodm.ringer.web.interceptor.AuthTokenInterceptor" />
+        </mvc:interceptor>
     </mvc:interceptors>
-    -->
     
 </beans>
