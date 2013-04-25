@@ -1,6 +1,11 @@
-*.class
+# Build folder
+target
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# Mac garbage
+.DS_Store
+
+# Uninteresting stuff (backup files, logs, etc.)
+~*
+*.log
+
+
