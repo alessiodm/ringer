@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:mvc="http://www.springframework.org/schema/mvc" 
+       xmlns:oxm="http://www.springframework.org/schema/oxm" 
+       xmlns:p="http://www.springframework.org/schema/p" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd     http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd">
 				
     <!-- The controllers are autodetected POJOs labeled with the @Controller annotation. -->
     <context:component-scan base-package="org.alessiodm.ringer" use-default-filters="false">
@@ -13,7 +19,10 @@
     
     <context:component-scan base-package="org.alessiodm.ringer" />
  
+    <!-- Default marshaller and configuration -->
     <mvc:annotation-driven />
+    
+    <oxm:jaxb2-marshaller id="jaxbMarshaller" contextPath="org.alessiodm.ringer.model"/>
     
     <!-- Register "global" interceptor beans to apply to all registered HandlerMappings -->
     <!-- Going to use an interceptor to verify authentication token -->
@@ -23,4 +32,4 @@
     </mvc:interceptors>
     -->
     
- </beans>
+</beans>
