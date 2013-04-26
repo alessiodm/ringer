@@ -1,8 +1,8 @@
-package org.alessiodm.ringer.web.interceptor;
+package org.alessiodm.ringer.web.api.v1.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.alessiodm.ringer.web.auth.IAuthService;
+import org.alessiodm.ringer.web.api.v1.auth.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.web.auth;
+package org.alessiodm.ringer.web.api.v1.auth;
 
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,17 @@ public class InMemoryAuthService implements IAuthService {
     }
     
     @Override
-    public String getToken(Integer accountId) {
-        if (accountId == null){
+    public String createTokenForUser(String username, String password) {
+        if (username == null || password == null){
             return null;
         }
         
-        if (tokens.containsValue(accountId)){
+        // TODO: get user id and password from database
+        Integer userId = -1;
+        
+        if (tokens.containsValue(userId)){
             for (String token : tokens.keySet()){
-                if (tokens.get(token).equals(accountId)){
+                if (tokens.get(token).equals(userId)){
                     return token;
                 }
             }
@@ -44,7 +47,7 @@ public class InMemoryAuthService implements IAuthService {
         }
         while(tokens.containsKey(_token));
         
-        tokens.put(_token, accountId);
+        tokens.put(_token, userId);
         return _token;
     }
 

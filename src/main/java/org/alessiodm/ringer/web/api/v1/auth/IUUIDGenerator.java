@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.web.auth;
+package org.alessiodm.ringer.web.api.v1.auth;
 
 public interface IUUIDGenerator {
     

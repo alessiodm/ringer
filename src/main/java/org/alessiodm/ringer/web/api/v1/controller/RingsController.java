@@ -1,13 +1,13 @@
-package org.alessiodm.ringer.web.controller;
+package org.alessiodm.ringer.web.api.v1.controller;
 
-import org.alessiodm.ringer.model.Foo;
+import org.alessiodm.ringer.web.api.v1.dto.Foo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class VisitController {
+public class RingsController {
     
     @RequestMapping(value = "/api/v1/secure/hello", produces = {"application/json", "application/xml"})
     public @ResponseBody Foo helloSecure(){

@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.web.auth;
+package org.alessiodm.ringer.web.api.v1.auth;
 
 import java.util.UUID;
 import org.springframework.context.annotation.Scope;

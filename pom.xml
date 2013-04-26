@@ -310,8 +310,8 @@
                 </executions>
                 <configuration>
                     <tasks>
-                        <copy file="src/main/java/org/alessiodm/ringer/model/jaxb.index" 
-                              tofile="target/classes/org/alessiodm/ringer/model/jaxb.index" />
+                        <copy file="src/main/java/org/alessiodm/ringer/web/api/v1/dto/jaxb.index" 
+                              tofile="target/classes/org/alessiodm/ringer/web/api/v1/dto/jaxb.index" />
                     </tasks>
                 </configuration>
             </plugin>

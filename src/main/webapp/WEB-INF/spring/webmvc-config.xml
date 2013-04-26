@@ -22,14 +22,14 @@
     <!-- Default marshaller and configuration -->
     <mvc:annotation-driven />
     
-    <oxm:jaxb2-marshaller id="jaxbMarshaller" contextPath="org.alessiodm.ringer.model"/>
+    <oxm:jaxb2-marshaller id="jaxbMarshaller" contextPath="org.alessiodm.ringer.web.api.v1.dto"/>
     
     <!-- Register "global" interceptor beans to apply to all registered HandlerMappings -->
     <!-- Going to use an interceptor to verify authentication token -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/api/v*/secure/*"/>
-            <bean class="org.alessiodm.ringer.web.interceptor.AuthTokenInterceptor" />
+            <bean class="org.alessiodm.ringer.web.api.v1.interceptor.AuthTokenInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
     

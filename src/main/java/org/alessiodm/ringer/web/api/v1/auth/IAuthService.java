@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.web.auth;
+package org.alessiodm.ringer.web.api.v1.auth;
 
 /**
  * Simple auth service for Ringer application.
@@ -7,7 +7,7 @@ package org.alessiodm.ringer.web.auth;
  */
 public interface IAuthService {
     
-    public String getToken(Integer a);
+    public String createTokenForUser(String username, String password);
     public void retireToken(String token);
     public Integer validateToken(String token);
     
