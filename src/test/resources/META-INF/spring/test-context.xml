@@ -13,10 +13,17 @@
     <bean id="mockAuthService" class="org.alessiodm.ringer.test.web.api.v1.mock.MockAuthService" scope="singleton"></bean>
     <bean id="authServiceImpl" autowire-candidate="false" class="org.alessiodm.ringer.web.api.v1.auth.InMemoryAuthService" scope="singleton"></bean>
     <bean id="uuidGenerator" class="org.alessiodm.ringer.web.api.v1.auth.UUIDGeneratorImpl" scope="singleton"></bean>
+    
     <bean id="userDaoImpl" class="org.alessiodm.ringer.dao.impl.UserDaoImpl"> 
         <property name="dataSource" ref="dataSource"/>
-    </bean>       
-
+    </bean>
+    <bean id="relationDaoImpl" class="org.alessiodm.ringer.dao.impl.RelationDaoImpl"> 
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="ringDaoImpl" class="org.alessiodm.ringer.dao.impl.RingDaoImpl"> 
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
