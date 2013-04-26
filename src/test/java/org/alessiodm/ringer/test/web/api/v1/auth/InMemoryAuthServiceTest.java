@@ -1,7 +1,7 @@
-package org.alessio.ringer.test.web.api.v1.auth;
+package org.alessiodm.ringer.test.web.api.v1.auth;
 
-import org.alessiodm.ringer.web.api.v1.auth.UUIDGenerator;
 import org.alessiodm.ringer.web.api.v1.auth.InMemoryAuthService;
+import org.alessiodm.ringer.web.api.v1.auth.UUIDGenerator;
 import org.easymock.EasyMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;

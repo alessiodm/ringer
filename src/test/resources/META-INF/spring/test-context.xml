@@ -2,13 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans" 
        xmlns:context="http://www.springframework.org/schema/context" 
        xmlns:mvc="http://www.springframework.org/schema/mvc" 
-       xmlns:oxm="http://www.springframework.org/schema/oxm" 
+       xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
        xmlns:p="http://www.springframework.org/schema/p" 
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd     http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd     http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
     
     <bean id="mockAuthService" class="org.alessiodm.ringer.test.web.api.v1.mock.MockAuthService" scope="singleton"></bean>
     <bean id="authServiceImpl" autowire-candidate="false" class="org.alessiodm.ringer.web.api.v1.auth.InMemoryAuthService" scope="singleton"></bean>
     <bean id="uuidGenerator" class="org.alessiodm.ringer.web.api.v1.auth.UUIDGeneratorImpl" scope="singleton"></bean>
+    <bean id="userDaoImpl" class="org.alessiodm.ringer.dao.impl.UserDaoImpl"> 
+        <property name="dataSource" ref="dataSource"/>
+    </bean>       
     
+    <jdbc:embedded-database id="dataSource">
+        <jdbc:script location="classpath:test-schema.sql"/>
+        <jdbc:script location="classpath:test-data.sql"/>
+    </jdbc:embedded-database>
 </beans>

@@ -3,8 +3,11 @@ package org.alessiodm.ringer.dao.impl;
 import java.util.List;
 import org.alessiodm.ringer.dao.RelationDao;
 import org.alessiodm.ringer.model.User;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 
-public class RelationDaoImpl extends AbstractDaoImpl implements RelationDao {
+@Repository
+public class RelationDaoImpl extends NamedParameterJdbcDaoSupport implements RelationDao {
 
     @Override
     public void createRelation(Long followerId, Long followedId) {

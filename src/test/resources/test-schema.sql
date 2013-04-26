@@ -1,0 +1,32 @@
+ -- Dropping tables: pay attention to order for FK
+drop table if exists T_RELATION;
+drop table if exists T_RING;
+drop table if exists T_USER;
+
+create table T_USER (
+    ID BIGINT,
+    USERNAME VARCHAR(255) UNIQUE NOT NULL,
+    ENC_PASSWORD VARCHAR(255) NOT NULL,
+
+    CONSTRAINT pk_user PRIMARY KEY (ID)
+);
+
+create table T_RING (
+    ID BIGINT,
+    USER_ID BIGINT NOT NULL,
+    CONTENT VARCHAR(255) NOT NULL,
+    TIMESTAMP TIMESTAMP NOT NULL,
+
+    CONSTRAINT pk_ring PRIMARY KEY (ID),
+    CONSTRAINT fk_ring_user FOREIGN KEY (USER_ID) REFERENCES T_USER(ID)
+);
+
+create table T_RELATION (
+    FOLLOWER_ID BIGINT NOT NULL,
+    FOLLOWED_ID BIGINT NOT NULL,
+
+    CONSTRAINT pk_rel PRIMARY KEY (FOLLOWER_ID, FOLLOWED_ID),
+    CONSTRAINT fk_rel_user_follower FOREIGN KEY (FOLLOWER_ID) REFERENCES T_USER(ID),
+    CONSTRAINT fk_rel_user_followed FOREIGN KEY (FOLLOWED_ID) REFERENCES T_USER(ID)
+);
+

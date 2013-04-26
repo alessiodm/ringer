@@ -8,7 +8,7 @@ public class User {
     
     private Long id;
     private String username;
-    private String password;
+    private String encPassword;
 
     public Long getId() {
         return id;
@@ -26,11 +26,11 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEncPassword() {
+        return encPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEncPassword(String password) {
+        this.encPassword = password;
     }   
 }

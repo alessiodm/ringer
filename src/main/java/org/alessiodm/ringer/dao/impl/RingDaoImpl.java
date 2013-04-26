@@ -3,8 +3,11 @@ package org.alessiodm.ringer.dao.impl;
 import java.util.List;
 import org.alessiodm.ringer.dao.RingDao;
 import org.alessiodm.ringer.model.Ring;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 
-public class RingDaoImpl extends AbstractDaoImpl implements RingDao {
+@Repository
+public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao {
 
     @Override
     public Long createRing(Long userId, String content) {
