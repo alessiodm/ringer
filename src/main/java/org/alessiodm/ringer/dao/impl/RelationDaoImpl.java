@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 public class RelationDaoImpl extends NamedParameterJdbcDaoSupport implements RelationDao {
 
     @Override
-    public void createRelation(Long followerId, Long followedId) {
+    public int createRelation(Long followerId, Long followedId) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void deleteRelation(Long followerId, Long followedId) {
+    public int deleteRelation(Long followerId, Long followedId) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

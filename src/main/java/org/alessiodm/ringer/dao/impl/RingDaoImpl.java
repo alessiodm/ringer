@@ -20,7 +20,7 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
     }
 
     @Override
-    public boolean deleteRing(Long ringIg) {
+    public int deleteRing(Long ringIg) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

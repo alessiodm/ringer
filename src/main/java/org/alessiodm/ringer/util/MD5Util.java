@@ -33,6 +33,6 @@ public class MD5Util {
     }
     
     public static void main(String[] args){
-        System.out.println(MD5Util.encrypt("user2", "user2"));
+        System.out.println(MD5Util.encrypt("user3", "user3"));
     }
 }

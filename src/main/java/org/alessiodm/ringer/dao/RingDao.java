@@ -11,7 +11,7 @@ public interface RingDao {
     
     public Long createRing(Long userId, String content);
     public Ring findById(Long ringId);
-    public boolean deleteRing(Long ringIg);
+    public int deleteRing(Long ringIg);
     public List<Ring> listRings(Long userId, String keyword);
     
 }
