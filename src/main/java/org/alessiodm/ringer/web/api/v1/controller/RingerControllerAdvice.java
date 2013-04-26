@@ -29,11 +29,17 @@ public class RingerControllerAdvice {
      * @param request   HTTP request
      * @param model     Current model
      */
-    @ModelAttribute("userId")
+    @ModelAttribute
     public void getUserId(HttpServletRequest request, Model model){
         String token = request.getParameter("token");
         Integer id = authService.validateToken(token);
-        model.addAttribute("userId", id != null ? id : -1); //TOFIX: allow null
+        
+        if(token != null){
+            model.addAttribute("token", token);
+        }
+        if(id != null){
+            model.addAttribute("userId", id);
+        } 
     }
     
 }

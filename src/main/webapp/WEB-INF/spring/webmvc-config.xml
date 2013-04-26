@@ -17,8 +17,6 @@
     <mvc:default-servlet-handler/>
     -->
     
-    <context:component-scan base-package="org.alessiodm.ringer" />
- 
     <!-- Default marshaller and configuration -->
     <mvc:annotation-driven />
     
@@ -28,7 +26,7 @@
     <!-- Going to use an interceptor to verify authentication token -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/api/v*/secure/*"/>
+            <mvc:mapping path="/api/v*/secure/**/*"/>
             <bean class="org.alessiodm.ringer.web.api.v1.interceptor.AuthTokenInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

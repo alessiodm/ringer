@@ -4,6 +4,7 @@ import org.alessiodm.ringer.web.api.v1.auth.IAuthService;
 import org.alessiodm.ringer.web.api.v1.dto.AuthToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,14 @@ public class AuthController {
     @Autowired
     private IAuthService authService;
     
+    /**
+     * We do not verify here user credentials because this operation is 
+     * demanded to the authorization service.
+     * 
+     * @param username User username
+     * @param password User password
+     * @return Authorization token
+     */
     @RequestMapping(value = "/api/v1/auth/token", produces = {"application/json", "application/xml"})
     public @ResponseBody AuthToken getToken(@RequestParam(value = "username", required = true) String username,
                                             @RequestParam(value = "password", required = true) String password){
@@ -27,8 +36,8 @@ public class AuthController {
         return new AuthToken(token);
     }
     
-    @RequestMapping(value = "/api/v1/auth/invalidateToken", method = RequestMethod.GET)
-    public @ResponseBody void invalidateToken(@RequestParam(value = "token", required = true) String token){
+    @RequestMapping(value = "/api/v1/secure/auth/invalidateToken", method = RequestMethod.GET)
+    public @ResponseBody void invalidateToken(@ModelAttribute("token") String token){
         authService.retireToken(token);
     }
     

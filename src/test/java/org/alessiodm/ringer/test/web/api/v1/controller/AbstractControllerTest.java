@@ -12,7 +12,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration("file:src/test/resources/META-INF/spring/test-context.xml")
+@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/webmvc-config.xml",
+                      "file:src/test/resources/META-INF/spring/test-context.xml"})
 public abstract class AbstractControllerTest {
     @Autowired
     protected WebApplicationContext wac;
