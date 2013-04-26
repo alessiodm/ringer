@@ -56,4 +56,9 @@ public class RingDaoImplTest extends AbstractDaoTest {
             assertEquals("Order broken " + j, (long) j, rings.get(5 - i).getId().longValue());
         }
     }
+    
+    @Test(expected=RuntimeException.class)
+    public void testHSQLDBExceptionForListingRingWithKeyword(){
+        ringDao.listRings(1L, "User 2", 0, 100);
+    }
 }

@@ -78,24 +78,30 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
         perPage = perPage < 0 ? 10 : perPage; 
         int offset = perPage * page;
         
+        String matchSql = " and match(ring.content) against :keyword ";
         String sql = " select ring.id, ring.user_id, ring.content, ring.timestamp "
                     + "from T_RING as ring "
                     + "    join T_RELATION as rel on (ring.user_id = rel.followed_id) "
-                    + "where rel.follower_id = :userId "
-                
+                    + "where rel.follower_id = :userId %s "
                     + "  union "    
-                
                     + "select ring.id, ring.user_id, ring.content, ring.timestamp "
                     + "from T_RING as ring "
-                    + "where ring.user_id = :userId "
+                    + "where ring.user_id = :userId %s "
                     + "order by timestamp desc "
                     + "limit :offset, :perPage ";
-
+        
         Map<String, Object> parameters = new HashMap<String, Object>(3);
         parameters.put("userId", userId);
         parameters.put("perPage", perPage);
         parameters.put("offset", offset);
         
+        if (keyword != null){
+            sql = String.format(sql, matchSql, matchSql);
+            parameters.put("keyword", keyword);
+        }
+        else {
+            sql = String.format(sql, "", "");  
+        }
         return getNamedParameterJdbcTemplate().query(sql, parameters, ringFullMapper);
     }
     
