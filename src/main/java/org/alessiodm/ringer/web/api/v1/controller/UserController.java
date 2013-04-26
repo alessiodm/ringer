@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private IAuthService authService;
     
-    @RequestMapping(value = "/api/v1/secure/user/register", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
+    @RequestMapping(value = "/api/v1/user/register", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
     public @ResponseBody AuthToken register(@RequestBody UserCredentials u){
         // TODO: add user
         String token = authService.createTokenForUser(u.getUsername(), u.getPassword());

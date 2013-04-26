@@ -1,6 +1,5 @@
 package org.alessiodm.ringer.web.api.v1.controller;
 
-import org.alessiodm.ringer.web.api.v1.dto.Foo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,16 +8,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class RingsController {
     
-    @RequestMapping(value = "/api/v1/secure/hello", produces = {"application/json", "application/xml"})
-    public @ResponseBody Foo helloSecure(){
-        return new Foo();
+    @RequestMapping(value = "/api/v1/secure/rings/list", produces = {"application/json", "application/xml"})
+    public @ResponseBody Object listRings(@ModelAttribute("userId") Integer userId){
+        throw new UnsupportedOperationException("Not implemented yet.");
+    }
+    
+    @RequestMapping(value = "/api/v1/secure/rings/show/{ringId}", produces = {"application/json", "application/xml"})
+    public @ResponseBody Object showRing(@ModelAttribute("userId") Integer userId){
+        throw new UnsupportedOperationException("Not implemented yet.");
     }
 
-    @RequestMapping(value = "/api/v1/hello", produces = {"application/json", "application/xml"})
-    public @ResponseBody Foo hello(@ModelAttribute("userId") Integer userId){
-        Foo foo = new Foo();
-        foo.setBu(userId);
-        return foo;
+    @RequestMapping(value = "/api/v1/secure/rings/create", produces = {"application/json", "application/xml"})
+    public @ResponseBody Object createRing(@ModelAttribute("userId") Integer userId){
+        throw new UnsupportedOperationException("Not implemented yet.");
+    }
+    
+    @RequestMapping(value = "/api/v1/secure/rings/delete/{ringId}", produces = {"application/json", "application/xml"})
+    public @ResponseBody Object deleteRing(@ModelAttribute("userId") Integer userId){
+        throw new UnsupportedOperationException("Not implemented yet.");
     }
     
 }
