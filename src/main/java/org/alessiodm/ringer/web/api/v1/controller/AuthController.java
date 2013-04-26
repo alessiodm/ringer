@@ -2,11 +2,11 @@ package org.alessiodm.ringer.web.api.v1.controller;
 
 import org.alessiodm.ringer.web.api.v1.auth.IAuthService;
 import org.alessiodm.ringer.web.api.v1.dto.AuthToken;
-import org.alessiodm.ringer.web.api.v1.dto.UserCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -21,15 +21,15 @@ public class AuthController {
     private IAuthService authService;
     
     @RequestMapping(value = "/api/v1/auth/token", produces = {"application/json", "application/xml"})
-    public @ResponseBody AuthToken getToken(@RequestBody UserCredentials u){
-        String token = authService.createTokenForUser(u.getUsername(), u.getPassword());
+    public @ResponseBody AuthToken getToken(@RequestParam(value = "username", required = true) String username,
+                                            @RequestParam(value = "password", required = true) String password){
+        String token = authService.createTokenForUser(username, password);
         return new AuthToken(token);
     }
     
-    @RequestMapping(value = "/api/v1/auth/invalidate_token")
-    public boolean invalidateToken(@RequestBody AuthToken token){
-        authService.retireToken(token.getToken());
-        return true;
+    @RequestMapping(value = "/api/v1/auth/invalidateToken", method = RequestMethod.GET)
+    public @ResponseBody void invalidateToken(@RequestParam(value = "token", required = true) String token){
+        authService.retireToken(token);
     }
     
 }
