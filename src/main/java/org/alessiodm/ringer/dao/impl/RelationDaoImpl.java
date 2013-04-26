@@ -48,14 +48,8 @@ public class RelationDaoImpl extends NamedParameterJdbcDaoSupport implements Rel
 
     @Override
     public List<User> listFollowers(Long followedId, int page, int perPage) {
-        if (page < 0){
-            page = 0;
-        }
-        
-        if (perPage < 0 || perPage > 100){
-            perPage = 10;
-        }
-        
+        page = page < 0 ? 0 : page;
+        perPage = perPage < 0 ? 10 : perPage; 
         int offset = perPage * page;
         
         String sql =  "select u.id, u.username, u.enc_password "
@@ -65,7 +59,7 @@ public class RelationDaoImpl extends NamedParameterJdbcDaoSupport implements Rel
                     + "order by r.follower_id "
                     + "limit :offset, :perPage ";
 
-        Map<String, Object> parameters = new HashMap<String, Object>(1);
+        Map<String, Object> parameters = new HashMap<String, Object>(3);
         parameters.put("followedId", followedId);
         parameters.put("perPage", perPage);
         parameters.put("offset", offset);
@@ -75,14 +69,8 @@ public class RelationDaoImpl extends NamedParameterJdbcDaoSupport implements Rel
 
     @Override
     public List<User> listFollowing(Long followerId, int page, int perPage) {
-        if (page < 0){
-            page = 0;
-        }
-        
-        if (perPage < 0 || perPage > 100){
-            perPage = 10;
-        }
-        
+        page = page < 0 ? 0 : page;
+        perPage = perPage < 0 ? 10 : perPage; 
         int offset = perPage * page;
         
         String sql =  "select u.id, u.username, u.enc_password "
@@ -92,7 +80,7 @@ public class RelationDaoImpl extends NamedParameterJdbcDaoSupport implements Rel
                     + "order by r.followed_id "
                     + "limit :offset, :perPage ";
 
-        Map<String, Object> parameters = new HashMap<String, Object>(1);
+        Map<String, Object> parameters = new HashMap<String, Object>(3);
         parameters.put("followerId", followerId);
         parameters.put("perPage", perPage);
         parameters.put("offset", offset);

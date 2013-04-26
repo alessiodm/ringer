@@ -9,12 +9,9 @@ import java.util.Date;
 public class Ring {
     
     private Long id;
+    private Long userId;
     private String content;
     private Date timestamp;
-    
-    // Useful for rapid checking out user info
-    private Long userId;
-    private String username;
     
     public Long getId() {
         return id;
@@ -30,14 +27,6 @@ public class Ring {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getContent() {
@@ -58,9 +47,9 @@ public class Ring {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 59 * hash + (this.username != null ? this.username.hashCode() : 0);
+        int hash = 7;
+        hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 41 * hash + (this.userId != null ? this.userId.hashCode() : 0);
         return hash;
     }
 
@@ -76,10 +65,9 @@ public class Ring {
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
-        if ((this.username == null) ? (other.username != null) : !this.username.equals(other.username)) {
+        if (this.userId != other.userId && (this.userId == null || !this.userId.equals(other.userId))) {
             return false;
         }
         return true;
     }
-    
 }
