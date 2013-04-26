@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class RingsController {
+public class RingController {
     
     @RequestMapping(value = "/api/v1/secure/rings/list", produces = {"application/json", "application/xml"})
     public @ResponseBody Object listRings(@ModelAttribute("userId") Integer userId){

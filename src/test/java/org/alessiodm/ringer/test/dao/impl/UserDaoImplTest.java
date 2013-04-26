@@ -8,13 +8,29 @@ import org.apache.log4j.Logger;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
+@TransactionConfiguration(defaultRollback = true)
 public class UserDaoImplTest extends AbstractRingerSpringTest {
     
     private final static Logger log = Logger.getLogger(UserDaoImplTest.class);
     
     @Autowired
     private UserDao userDao;
+    
+    @Test
+    public void testDeleteUser(){
+        userDao.deleteUser(1L);
+        userDao.deleteUser(2L);
+        userDao.deleteUser(3L);
+        userDao.deleteUser(4L);
+        int val = userDao.deleteUser(5L);
+        assertEquals("Deleted itemes different", 1, val);
+        User user = userDao.findById(1L);
+        assertNull("User not deleted", user);
+    }
     
     @Test
     public void testFindUserById(){
@@ -28,14 +44,6 @@ public class UserDaoImplTest extends AbstractRingerSpringTest {
         User user = userDao.findByUsername("user3");
         assertNotNull("No user found", user);
         assertEquals("Username different", "user3", user.getUsername());
-    }
-    
-    @Test
-    public void testDeleteUser(){
-        int val = userDao.deleteUser(1L);
-        assertEquals("Deleted itemes different", 1, val);
-        User user = userDao.findById(1L);
-        assertNull("User not deleted", user);
     }
     
     @Test
