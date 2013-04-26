@@ -5,7 +5,7 @@ package org.alessiodm.ringer.web.api.v1.auth;
  * 
  * @author alessio
  */
-public interface IAuthService {
+public interface AuthService {
     
     public String createTokenForUser(String username, String password);
     public void retireToken(String token);

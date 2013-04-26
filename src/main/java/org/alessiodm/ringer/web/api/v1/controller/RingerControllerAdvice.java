@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.web.api.v1.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import org.alessiodm.ringer.web.api.v1.auth.IAuthService;
+import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class RingerControllerAdvice {
     
     @Autowired
-    private IAuthService authService;
+    private AuthService authService;
     
     /**
      * Get the ID of the user the token belongs to.

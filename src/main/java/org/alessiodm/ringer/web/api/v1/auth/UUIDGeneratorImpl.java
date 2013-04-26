@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value="singleton")
-public class UUIDGeneratorImpl implements IUUIDGenerator {
+public class UUIDGeneratorImpl implements UUIDGenerator {
 
     @Override
     public String generate() {

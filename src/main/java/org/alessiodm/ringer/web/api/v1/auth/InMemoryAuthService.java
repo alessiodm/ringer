@@ -3,17 +3,17 @@ package org.alessiodm.ringer.web.api.v1.auth;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 
-@Repository
+@Service
 @Scope(value="singleton")
-public class InMemoryAuthService implements IAuthService {
+public class InMemoryAuthService implements AuthService {
 
     protected ConcurrentHashMap<String, Integer> tokens = new ConcurrentHashMap<String, Integer>();
     
     @Autowired
-    private IUUIDGenerator uuidGenerator;
+    private UUIDGenerator uuidGenerator;
 
     public InMemoryAuthService(){
         tokens.put("global1", -1);
@@ -63,11 +63,11 @@ public class InMemoryAuthService implements IAuthService {
         return token == null ? null : tokens.get(token);
     }
  
-    public IUUIDGenerator getUuidGenerator() {
+    public UUIDGenerator getUuidGenerator() {
         return uuidGenerator;
     }
 
-    public void setUuidGenerator(IUUIDGenerator uuidGenerator) {
+    public void setUuidGenerator(UUIDGenerator uuidGenerator) {
         this.uuidGenerator = uuidGenerator;
     }
     

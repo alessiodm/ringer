@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.web.api.v1.controller;
 
-import org.alessiodm.ringer.web.api.v1.auth.IAuthService;
+import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.alessiodm.ringer.web.api.v1.dto.AuthToken;
 import org.alessiodm.ringer.web.api.v1.dto.SimpleResult;
 import org.alessiodm.ringer.web.api.v1.dto.SimpleResult.ResultType;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
     
     @Autowired
-    private IAuthService authService;
+    private AuthService authService;
     
     @RequestMapping(value = "/api/v1/user/register", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
     public @ResponseBody AuthToken register(@RequestBody UserCredentials u){

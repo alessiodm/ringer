@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.web.api.v1.controller;
 
-import org.alessiodm.ringer.web.api.v1.auth.IAuthService;
+import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.alessiodm.ringer.web.api.v1.dto.AuthToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AuthController {
     
     @Autowired
-    private IAuthService authService;
+    private AuthService authService;
     
     /**
      * We do not verify here user credentials because this operation is 

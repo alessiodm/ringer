@@ -1,6 +1,6 @@
 package org.alessio.ringer.test.web.api.v1.auth;
 
-import org.alessiodm.ringer.web.api.v1.auth.IUUIDGenerator;
+import org.alessiodm.ringer.web.api.v1.auth.UUIDGenerator;
 import org.alessiodm.ringer.web.api.v1.auth.InMemoryAuthService;
 import org.easymock.EasyMock;
 import static org.easymock.EasyMock.expect;
@@ -13,7 +13,7 @@ public class InMemoryAuthServiceTest {
     @Ignore
     @Test(expected = RuntimeException.class)
     public void testUUIDConflictError() {
-        IUUIDGenerator gen = EasyMock.createMock(IUUIDGenerator.class);
+        UUIDGenerator gen = EasyMock.createMock(UUIDGenerator.class);
         expect(gen.generate()).andReturn("fufufufufufufu").times(15);
         replay(gen);
         
