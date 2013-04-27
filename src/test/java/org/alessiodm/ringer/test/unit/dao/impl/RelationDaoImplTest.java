@@ -41,6 +41,12 @@ public class RelationDaoImplTest extends AbstractDaoTest {
     }
     
     @Test
+    public void testFollows(){
+        assertTrue(relationDao.follows(1L, 2L));
+        assertFalse(relationDao.follows(1L, 5L));
+    }
+    
+    @Test
     public void testListFollowingPaginated(){
         List<User> fwing = relationDao.listFollowing(1L, 1, 2);
         assertEquals("Number of following unexpected", 1, fwing.size());

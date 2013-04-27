@@ -4,6 +4,7 @@ import java.util.List;
 import org.alessiodm.ringer.dao.RelationDao;
 import org.alessiodm.ringer.dao.UserDao;
 import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.util.RingerAPIException;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,10 @@ public class UserService {
     
     @Transactional
     public User registerUser(String username, String password){
+        User u = userDao.findByUsername(username);
+        if (u != null){
+            throw RingerAPIException.USERNAME_NOT_AVAILABLE;
+        }
         return userDao.createUser(username, password);
     }
     
@@ -45,6 +50,9 @@ public class UserService {
      
     @Transactional
     public int startFollowing(Long id, Long newFollowed){
+        if (relationDao.follows(id, newFollowed)){
+            throw RingerAPIException.RELATION_ALREADY_EXISTS;
+        }
         return relationDao.createRelation(id, newFollowed);
     }
     

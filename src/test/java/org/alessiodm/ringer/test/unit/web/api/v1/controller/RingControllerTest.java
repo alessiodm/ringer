@@ -24,7 +24,7 @@ public class RingControllerTest extends AbstractUnitControllerTest {
     @Autowired
     private UserDao userDao;
     
-    User u1;
+    private User u1;
     
     @Before
     public void setUp(){

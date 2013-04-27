@@ -39,6 +39,16 @@ public class RelationDaoImpl extends NamedParameterJdbcDaoSupport implements Rel
     }
 
     @Override
+    public boolean follows(Long followerId, Long followedId){
+        String sql = "select count(*) from T_RELATION where follower_id = :followerId and followed_id = :followedId";
+       SqlParameterSource parameters = new MapSqlParameterSource()
+                                            .addValue("followerId", followerId)
+                                            .addValue("followedId", followedId);
+       
+       return getNamedParameterJdbcTemplate().queryForObject(sql, parameters, Integer.class) == 1;
+    }    
+    
+    @Override
     public int deleteRelation(Long followerId, Long followedId) {
         Map<String, Object> parameters = new HashMap<String, Object>(2);
         parameters.put("followerId", followerId);

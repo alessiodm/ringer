@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.alessiodm.ringer.dao.UserDao;
 import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.util.RingerAPIException;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,12 @@ public class RingerControllerAdvice {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error in accessing data")
     public void dataAccessExceptionHandler(RuntimeException ex, HttpServletResponse response) {
         log.warn("Got a " + ex.getClass().getSimpleName() + " : " + ex.getLocalizedMessage());
+    }
+    
+    @ExceptionHandler(RingerAPIException.class)
+    public void ringerAPIExceptionHandler(RingerAPIException ex, HttpServletResponse response) throws IOException{
+        log.info("Got a " + ex.getClass().getSimpleName() + " : " + ex.getLocalizedMessage());
+        response.sendError(HttpStatus.NOT_ACCEPTABLE.value(), ex.getMessage());
     }
     
     /**
