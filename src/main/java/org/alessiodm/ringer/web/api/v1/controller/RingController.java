@@ -1,8 +1,8 @@
 package org.alessiodm.ringer.web.api.v1.controller;
 
 import java.util.List;
-import org.alessiodm.ringer.model.Ring;
-import org.alessiodm.ringer.model.User;
+import org.alessiodm.ringer.domain.Ring;
+import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.service.RingService;
 import org.alessiodm.ringer.web.api.v1.dto.ListOfRings;
 import org.alessiodm.ringer.web.api.v1.dto.RingContent;

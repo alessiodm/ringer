@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.dao;
 
 import java.util.List;
-import org.alessiodm.ringer.model.Ring;
+import org.alessiodm.ringer.domain.Ring;
 
 /**
  *

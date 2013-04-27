@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.test.unit.web.api.v1.mock;
 
-import org.alessiodm.ringer.model.User;
+import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 
 public class MockAuthService implements AuthService {

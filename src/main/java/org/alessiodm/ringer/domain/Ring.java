@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.model;
+package org.alessiodm.ringer.domain;
 
 import java.util.Date;
 

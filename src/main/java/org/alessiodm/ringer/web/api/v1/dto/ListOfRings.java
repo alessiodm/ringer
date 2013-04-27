@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.web.api.v1.dto;
 
 import java.util.List;
-import org.alessiodm.ringer.model.Ring;
+import org.alessiodm.ringer.domain.Ring;
 
 public class ListOfRings {
     

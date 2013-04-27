@@ -2,7 +2,7 @@ package org.alessiodm.ringer.test.unit.dao.impl;
 
 import java.util.List;
 import org.alessiodm.ringer.dao.RelationDao;
-import org.alessiodm.ringer.model.User;
+import org.alessiodm.ringer.domain.User;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

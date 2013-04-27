@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.service;
 
 import org.alessiodm.ringer.dao.UserDao;
-import org.alessiodm.ringer.model.User;
+import org.alessiodm.ringer.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

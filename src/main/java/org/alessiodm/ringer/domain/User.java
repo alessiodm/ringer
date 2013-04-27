@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.model;
+package org.alessiodm.ringer.domain;
 
 import java.util.List;
 import org.alessiodm.ringer.dao.RelationDao;

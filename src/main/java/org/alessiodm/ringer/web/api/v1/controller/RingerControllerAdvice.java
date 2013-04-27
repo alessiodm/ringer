@@ -4,7 +4,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.alessiodm.ringer.dao.UserDao;
-import org.alessiodm.ringer.model.User;
+import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
 package org.alessiodm.ringer.web.api.v1.dto;
 
 import java.util.List;
-import org.alessiodm.ringer.model.User;
+import org.alessiodm.ringer.domain.User;
 
-public class ListOfUser {
+public class ListOfUsers {
     
     private List<User> users;
 

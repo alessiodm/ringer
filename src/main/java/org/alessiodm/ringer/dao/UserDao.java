@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.dao;
 
-import org.alessiodm.ringer.model.User;
+import org.alessiodm.ringer.domain.User;
 
 public interface UserDao {
     
