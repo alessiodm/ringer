@@ -1,5 +1,6 @@
 package org.alessiodm.ringer.web.api.v1.controller;
 
+import org.alessiodm.ringer.service.UserService;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.alessiodm.ringer.web.api.v1.dto.AuthToken;
 import org.alessiodm.ringer.web.api.v1.dto.SimpleResult;
@@ -19,16 +20,22 @@ public class UserController {
     @Autowired
     private AuthService authService;
     
+    @Autowired
+    private UserService userService;
+    
     @RequestMapping(value = "/api/v1/user/register", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
     public @ResponseBody AuthToken register(@RequestBody UserCredentials u){
-        // TODO: add user
+        userService.registerUser(u.getUsername(), u.getPassword());
         String token = authService.createTokenForUser(u.getUsername(), u.getPassword());
         return new AuthToken(token);
     }
     
     @RequestMapping(value = "/api/v1/secure/user/delete/{userId}", method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
     public @ResponseBody SimpleResult destroy(@PathVariable Integer userId){
-        // TODO: delete user
+        int result = userService.deleteUser((long) userId);
+        if (result != 1){
+            return new SimpleResult(ResultType.ERROR, "Result code: " + result);
+        }
         return new SimpleResult(ResultType.OKEY, "User deleted");
     }
 }
