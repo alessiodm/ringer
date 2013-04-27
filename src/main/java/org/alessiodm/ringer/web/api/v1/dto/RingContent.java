@@ -12,6 +12,13 @@ public class RingContent {
     @XmlElement
     private String content;
 
+    public RingContent(){
+    }
+    
+    public RingContent(String content){
+        this.content = content;
+    }
+    
     public String getContent() {
         return content;
     }
