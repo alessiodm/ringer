@@ -79,7 +79,7 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
         perPage = perPage < 0 ? 10 : perPage; 
         int offset = perPage * page;
         
-        String matchSql = " and match(ring.content) against(:keyword) ";
+        String matchSql = " and match(ring.content) against(:keyword in boolean mode) ";
         String sql = " select ring.id, ring.user_id, ring.content, ring.timestamp "
                     + "from T_RING as ring "
                     + "    join T_RELATION as rel on (ring.user_id = rel.followed_id) "
