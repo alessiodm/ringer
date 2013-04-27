@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class RingController {
+public class RingController extends BaseController {
     
     @Autowired
     private RingService ringService;

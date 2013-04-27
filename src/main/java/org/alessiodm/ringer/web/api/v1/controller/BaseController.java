@@ -1,7 +1,6 @@
 package org.alessiodm.ringer.web.api.v1.controller;
 
 import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.util.RingerAPIException;
@@ -12,9 +11,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
@@ -42,11 +41,8 @@ public abstract class BaseController {
      * @param request   HTTP request
      * @param model     Current model
      */
-    @ModelAttribute    
-    public void getUser(HttpServletRequest request, Model model){
-        String token = request.getParameter("token");
-        User user = authService.validateToken(token);
-        model.addAttribute("token", token);
-        model.addAttribute("user", user); 
+    @ModelAttribute("user") 
+    public User getUser(@RequestParam(required=false) String token){
+        return token != null ? authService.validateToken(token) : null;
     }
 }

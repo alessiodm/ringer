@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author alessio
  */
 @Controller
-public class AuthController {
+public class AuthController extends BaseController {
     
     @Autowired
     private AuthService authService;
