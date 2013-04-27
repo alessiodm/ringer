@@ -1,36 +1,42 @@
 package org.alessiodm.ringer.web.api.v1.auth;
 
 import java.util.concurrent.ConcurrentHashMap;
+import org.alessiodm.ringer.dao.UserDao;
+import org.alessiodm.ringer.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
 @Scope(value="singleton")
 public class InMemoryAuthService implements AuthService {
 
-    protected ConcurrentHashMap<String, Integer> tokens = new ConcurrentHashMap<String, Integer>();
+    protected ConcurrentHashMap<String, Long> tokens = new ConcurrentHashMap<String, Long>();
     
     @Autowired
     private UUIDGenerator uuidGenerator;
 
+    @Autowired
+    private UserDao userDao;
+    
     public InMemoryAuthService(){
-        tokens.put("global1", -1);
+        tokens.put("global1", -1L);
     }
     
     @Override
+    @Transactional
     public String createTokenForUser(String username, String password) {
         if (username == null || password == null){
             return null;
         }
         
-        // TODO: get user id and password from database
-        Integer userId = -1;
+        User user = userDao.lookupUserByCredentials(username, password);
         
-        if (tokens.containsValue(userId)){
+        if (tokens.containsValue(user.getId())){
             for (String token : tokens.keySet()){
-                if (tokens.get(token).equals(userId)){
+                if (tokens.get(token).equals(user.getId())){
                     return token;
                 }
             }
@@ -47,7 +53,7 @@ public class InMemoryAuthService implements AuthService {
         }
         while(tokens.containsKey(_token));
         
-        tokens.put(_token, userId);
+        tokens.put(_token, user.getId());
         return _token;
     }
 
@@ -59,8 +65,15 @@ public class InMemoryAuthService implements AuthService {
     }
 
     @Override
-    public Integer validateToken(String token) {
-        return token == null ? null : tokens.get(token);
+    @Transactional
+    public User validateToken(String token) {
+        Long uid = tokens.get(token);
+        if (token == null || uid == null){
+            return null;
+        }
+        
+        User user = userDao.findById(uid);
+        return user == null ? null : user;
     }
  
     public UUIDGenerator getUuidGenerator() {

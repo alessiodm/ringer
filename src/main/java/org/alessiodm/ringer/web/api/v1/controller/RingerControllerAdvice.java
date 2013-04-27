@@ -3,6 +3,8 @@ package org.alessiodm.ringer.web.api.v1.controller;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.alessiodm.ringer.dao.UserDao;
+import org.alessiodm.ringer.model.User;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,18 +47,12 @@ public class RingerControllerAdvice {
      * @param request   HTTP request
      * @param model     Current model
      */
-    @ModelAttribute
-    @Transactional
-    public void getUserId(HttpServletRequest request, Model model){
+    @ModelAttribute    
+    public void getUser(HttpServletRequest request, Model model){
         String token = request.getParameter("token");
-        Integer id = authService.validateToken(token);
-        
-        if(token != null){
-            model.addAttribute("token", token);
-        }
-        if(id != null){
-            model.addAttribute("userId", id);
-        } 
+        User user = authService.validateToken(token);
+        model.addAttribute("token", token);
+        model.addAttribute("user", user); 
     }
     
 }

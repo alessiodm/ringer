@@ -53,6 +53,18 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
     }
     
     @Override
+    public User lookupUserByCredentials(String username, String password) {
+        String sql = "select id, username, enc_password from T_USER where username = :username and enc_password = :encPassword";
+        String encPassword = MD5Util.encrypt(password, username);
+        Map<String, Object> parameters = new HashMap<String, Object>(2);
+        parameters.put("username", username);
+        parameters.put("encPassword", encPassword);
+            
+        List<User> list = getNamedParameterJdbcTemplate().query(sql, parameters, userFullMapper);
+        return list.isEmpty() ? null : list.get(0);
+    }
+    
+    @Override
     public User createUser(String username, String password) {
         // Username as salt
         String sql = "insert into T_USER (username, enc_password) values (:username, :encPassword)";

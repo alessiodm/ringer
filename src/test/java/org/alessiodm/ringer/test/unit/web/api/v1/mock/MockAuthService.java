@@ -1,10 +1,11 @@
 package org.alessiodm.ringer.test.unit.web.api.v1.mock;
 
+import org.alessiodm.ringer.model.User;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 
 public class MockAuthService implements AuthService {
 
-    private Integer validateUser;
+    private User validateUser;
 
     @Override
     public String createTokenForUser(String username, String password) {
@@ -17,15 +18,15 @@ public class MockAuthService implements AuthService {
     }
 
     @Override
-    public Integer validateToken(String token) {
+    public User validateToken(String token) {
         return validateUser;
     }
     
-    public Integer getValidateUser() {
+    public User getValidateUser() {
         return validateUser;
     }
 
-    public void setValidateUser(Integer validateUser) {
+    public void setValidateUser(User validateUser) {
         this.validateUser = validateUser;
     }
     

@@ -6,6 +6,7 @@ public interface UserDao {
     
     public User findById(Long id);
     public User findByUsername(String username);
+    public User lookupUserByCredentials(String username, String password);
     public User createUser(String username, String password);
     public int deleteUser(Long id);
     

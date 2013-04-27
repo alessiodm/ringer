@@ -42,6 +42,13 @@ public class UserDaoImplTest extends AbstractDaoTest {
     }
     
     @Test
+    public void testLookupByCredentials(){
+        User user = userDao.lookupUserByCredentials("user3", "user3");
+        assertNotNull("No user found", user);
+        assertEquals("Username different", "user3", user.getUsername());
+    }
+    
+    @Test
     public void testInsertUser(){
         User user = userDao.createUser("xuser", "xpassword");
         assertNotNull("User null", user);
