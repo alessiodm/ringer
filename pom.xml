@@ -229,7 +229,7 @@
     
     <build>
         <filters>
-            <filter>src/main/resources/${ENVIRONMENT}.properties</filter>
+            <filter>src/main/resources/${env.ENVIRONMENT}.properties</filter>
         </filters>
     
         <resources>
