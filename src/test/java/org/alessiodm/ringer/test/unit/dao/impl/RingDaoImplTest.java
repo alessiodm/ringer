@@ -33,7 +33,7 @@ public class RingDaoImplTest extends AbstractDaoTest {
     
     @Test 
     public void testDeleteRing(){
-        ringDao.deleteRing(1L);
+        ringDao.deleteRing(1L, 1L);
         Ring ring = ringDao.findById(1L);
         assertNull("Expected null", ring);
     }

@@ -66,10 +66,11 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
     }
 
     @Override
-    public int deleteRing(Long ringId) {
-        Map<String, Object> parameters = new HashMap<String, Object>(1);
+    public int deleteRing(Long ringId, Long userId) {
+        Map<String, Object> parameters = new HashMap<String, Object>(2);
         parameters.put("id", ringId);
-        return getNamedParameterJdbcTemplate().update("delete from T_RING where id = :id", parameters);
+        parameters.put("userId", userId);
+        return getNamedParameterJdbcTemplate().update("delete from T_RING where id = :id and user_id = :userId", parameters);
     }
 
     @Override
