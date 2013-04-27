@@ -31,8 +31,8 @@ public class UserController {
     }
     
     @RequestMapping(value = "/api/v1/secure/user/delete/{userId}", method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
-    public @ResponseBody SimpleResult destroy(@PathVariable Integer userId){
-        int result = userService.deleteUser((long) userId);
+    public @ResponseBody SimpleResult destroy(@PathVariable Long userId){
+        int result = userService.deleteUser(userId);
         if (result != 1){
             return new SimpleResult(ResultType.ERROR, "Result code: " + result);
         }

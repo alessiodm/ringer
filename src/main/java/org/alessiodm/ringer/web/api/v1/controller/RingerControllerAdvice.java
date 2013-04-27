@@ -4,9 +4,11 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,13 +28,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class RingerControllerAdvice {
     
+    private final static Logger log = Logger.getLogger(RingerControllerAdvice.class);
+    
     @Autowired
     private AuthService authService;
     
     @ExceptionHandler({DataAccessException.class, IOException.class})
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error in accessing data")
     public void dataAccessExceptionHandler(RuntimeException ex, HttpServletResponse response) {
-        // log...
+        log.warn("Got a " + ex.getClass().getSimpleName() + " : " + ex.getLocalizedMessage());
     }
     
     /**
@@ -42,6 +46,7 @@ public class RingerControllerAdvice {
      * @param model     Current model
      */
     @ModelAttribute
+    @Transactional
     public void getUserId(HttpServletRequest request, Model model){
         String token = request.getParameter("token");
         Integer id = authService.validateToken(token);

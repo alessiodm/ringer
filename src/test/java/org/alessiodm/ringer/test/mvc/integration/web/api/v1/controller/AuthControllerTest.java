@@ -1,12 +1,12 @@
-package org.alessiodm.ringer.test.web.api.v1.controller;
+package org.alessiodm.ringer.test.mvc.integration.web.api.v1.controller;
 
-import org.alessiodm.ringer.test.web.api.v1.mock.MockAuthService;
+import org.alessiodm.ringer.test.unit.web.api.v1.mock.MockAuthService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class AuthControllerTest extends AbstractControllerTest {
+public class AuthControllerTest extends AbstractMvcIntegrationControllerTest {
     
     @Autowired
     MockAuthService authService;

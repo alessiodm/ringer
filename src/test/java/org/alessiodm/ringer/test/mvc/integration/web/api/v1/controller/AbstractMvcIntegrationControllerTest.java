@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.test.web.api.v1.controller;
+package org.alessiodm.ringer.test.mvc.integration.web.api.v1.controller;
 
 import org.alessiodm.ringer.test.AbstractRingerSpringTest;
 import org.junit.Before;
@@ -11,7 +11,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 @WebAppConfiguration
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/webmvc-config.xml")
-public abstract class AbstractControllerTest extends AbstractRingerSpringTest {
+// Not @Transaction configuration because of MVC integration mocking infrastructure
+public abstract class AbstractMvcIntegrationControllerTest extends AbstractRingerSpringTest {
     @Autowired
     protected WebApplicationContext wac;
     protected MockMvc mvc;

@@ -32,7 +32,7 @@ public class User {
 
     public void setEncPassword(String password) {
         this.encPassword = password;
-    }   
+    }
 
     @Override
     public int hashCode() {

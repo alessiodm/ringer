@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.test.dao.impl;
+package org.alessiodm.ringer.test.unit.dao.impl;
 
 import org.alessiodm.ringer.dao.UserDao;
 import org.alessiodm.ringer.model.User;

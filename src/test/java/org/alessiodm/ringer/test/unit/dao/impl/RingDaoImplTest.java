@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.test.dao.impl;
+package org.alessiodm.ringer.test.unit.dao.impl;
 
 import java.util.List;
 import org.alessiodm.ringer.dao.RingDao;

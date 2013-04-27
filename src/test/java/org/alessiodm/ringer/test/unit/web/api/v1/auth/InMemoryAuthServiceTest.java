@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.test.web.api.v1.auth;
+package org.alessiodm.ringer.test.unit.web.api.v1.auth;
 
 import org.alessiodm.ringer.web.api.v1.auth.InMemoryAuthService;
 import org.alessiodm.ringer.web.api.v1.auth.UUIDGenerator;
