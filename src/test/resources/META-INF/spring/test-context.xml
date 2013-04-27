@@ -22,7 +22,7 @@
     <bean id="ringController" class="org.alessiodm.ringer.web.api.v1.controller.RingController"/>
     <bean id="relationController" class="org.alessiodm.ringer.web.api.v1.controller.RelationController"/>
     
-    <!-- Dao classes to autowire for testing -->
+    <!-- Dao classes to autowire -->
     <bean id="userDaoImpl" class="org.alessiodm.ringer.dao.impl.UserDaoImpl"> 
         <property name="dataSource" ref="dataSource"/>
     </bean>

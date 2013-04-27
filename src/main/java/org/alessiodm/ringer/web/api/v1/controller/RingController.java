@@ -33,7 +33,7 @@ public class RingController {
         perPage = perPage == null ? 10 : perPage;
         
         // Business logic
-        List<Ring> userRings = user.getRingsList(keyword, page, perPage);
+        List<Ring> userRings = ringService.getRingsList(user.getId(), keyword, page, perPage);
         
         // Preparing data for serialization
         ListOfRings lor = new ListOfRings();
@@ -49,12 +49,12 @@ public class RingController {
 
     @RequestMapping(value = "/api/v1/secure/rings/create", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
     public @ResponseBody Ring createRing(@RequestBody RingContent ringContent, @ModelAttribute("user") User user){
-        return user.shoutRing(ringContent.getContent());
+        return ringService.createRing(ringContent.getContent(), user.getId());
     }
     
     @RequestMapping(value = "/api/v1/secure/rings/delete/{ringId}", method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
     public @ResponseBody SimpleResult deleteRing(@PathVariable Long ringId, @ModelAttribute("user") User user){
-        int result = user.removeRing(ringId);
+        int result = ringService.deleteRing(ringId, user.getId());
         
         return SimpleResult.getSimpleResultFromExpectedInt(1, result);
     }

@@ -33,12 +33,13 @@ public class InMemoryAuthService implements AuthService {
         }
         
         User user = userDao.lookupUserByCredentials(username, password);
+        if (user == null){
+            return null;
+        }
         
-        if (tokens.containsValue(user.getId())){
-            for (String token : tokens.keySet()){
-                if (tokens.get(token).equals(user.getId())){
-                    return token;
-                }
+        for (String token : tokens.keySet()){
+            if (tokens.get(token).equals(user.getId())){
+                return token;
             }
         }
         
@@ -76,6 +77,22 @@ public class InMemoryAuthService implements AuthService {
         return user == null ? null : user;
     }
  
+    @Override
+    public String getUserToken(Long id) {
+        if (id == null){
+            return null;
+        }
+        
+        for (String token : tokens.keySet()){
+            if (tokens.get(token).equals(id)){
+                return token;
+            }
+        }
+        
+        return null;
+    }
+    
+    
     public UUIDGenerator getUuidGenerator() {
         return uuidGenerator;
     }
@@ -83,5 +100,5 @@ public class InMemoryAuthService implements AuthService {
     public void setUuidGenerator(UUIDGenerator uuidGenerator) {
         this.uuidGenerator = uuidGenerator;
     }
-    
+
 }

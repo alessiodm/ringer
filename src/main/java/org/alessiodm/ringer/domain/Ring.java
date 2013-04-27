@@ -1,16 +1,29 @@
 package org.alessiodm.ringer.domain;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * 
  * @author alessio
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Ring {
     
+    @XmlElement
     private Long id;
+    
+    @XmlElement
     private Long userId;
+    
+    @XmlElement
     private String content;
+    
+    @XmlElement
     private Date timestamp;
     
     public Long getId() {

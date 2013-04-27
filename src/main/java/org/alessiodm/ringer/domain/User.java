@@ -1,67 +1,28 @@
 package org.alessiodm.ringer.domain;
 
-import java.util.List;
-import org.alessiodm.ringer.dao.RelationDao;
-import org.alessiodm.ringer.dao.RingDao;
-import org.alessiodm.ringer.dao.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author alessio
  */
 @Component
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class User {
     
+    @XmlElement
     private Long id;
+    
+    @XmlElement
     private String username;
+    
+    @XmlElement
     private String encPassword;
-
-    @Autowired
-    private UserDao userDao;
-    
-    @Autowired
-    private RingDao ringDao;
-    
-    @Autowired
-    private RelationDao relationDao;
-    
-    @Transactional
-    public Ring shoutRing(String content){
-        return ringDao.createRing(id, content);
-    }
-    
-    @Transactional
-    public int removeRing(Long ringId){
-        return ringDao.deleteRing(ringId, id);
-    }
-    
-    @Transactional
-    public List<Ring> getRingsList(String keyword, int page, int perPage){
-        return ringDao.listRings(id, keyword, page, perPage);
-    }
-    
-    @Transactional
-    public int startFollowing(Long newFollowed){
-        return relationDao.createRelation(id, newFollowed);
-    }
-    
-    @Transactional
-    public int stopFollowing(Long followed){
-        return relationDao.deleteRelation(id, followed);
-    }
-    
-    @Transactional
-    public List<User> getMyFollowers(int page, int perPage){
-        return relationDao.listFollowers(id, page, perPage);
-    }
-    
-    @Transactional
-    public List<User> getMyFollowedUsers(int page, int perPage){
-        return relationDao.listFollowing(id, page, perPage);
-    }
     
     public Long getId() {
         return id;

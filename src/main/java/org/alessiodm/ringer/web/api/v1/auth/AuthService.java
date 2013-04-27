@@ -12,5 +12,6 @@ public interface AuthService {
     public String createTokenForUser(String username, String password);
     public void retireToken(String token);
     public User validateToken(String token);
+    public String getUserToken(Long id);
     
 }
