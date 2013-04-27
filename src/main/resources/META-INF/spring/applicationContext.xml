@@ -32,7 +32,7 @@
        Getiing things done with Heroku
     -->
     <bean class="java.net.URI" id="dbUrl">
-        <constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/>
+        <constructor-arg value="#{systemEnvironment['CLEARDB_DATABASE_URL']}"/>
     </bean>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">

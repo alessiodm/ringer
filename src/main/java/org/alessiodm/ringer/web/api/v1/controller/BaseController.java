@@ -33,7 +33,7 @@ public abstract class BaseController {
     
     @ExceptionHandler(RingerAPIException.class)
     public ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-        return new ResponseEntity(ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.CONFLICT);
+        return new ResponseEntity("", new HttpHeaders(), HttpStatus.CONFLICT);
     }
  
     /**

@@ -68,8 +68,12 @@ public class InMemoryAuthService implements AuthService {
     @Override
     @Transactional
     public User validateToken(String token) {
+        if (token == null){
+            return null;
+        }
+        
         Long uid = tokens.get(token);
-        if (token == null || uid == null){
+        if (uid == null){
             return null;
         }
         
