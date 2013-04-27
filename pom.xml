@@ -228,10 +228,13 @@
     
     
     <build>
+        <!--                                                            -->
+        <!-- Filtering strategy, just in case we would like to move out -->
+        <!-- form Heroku.                                               -->
+        <!--
         <filters>
             <filter>src/main/resources/${env.ENVIRONMENT}.properties</filter>
         </filters>
-    
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -248,7 +251,8 @@
                 </excludes>
             </resource>
         </resources>
-        
+        -->
+            
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
