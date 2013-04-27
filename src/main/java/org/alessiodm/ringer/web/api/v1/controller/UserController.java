@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class UserController {
+public class UserController extends BaseController {
     
     @Autowired
     private AuthService authService;
@@ -38,4 +38,5 @@ public class UserController {
         }
         return new SimpleResult(ResultType.OKEY, "User deleted");
     }
+
 }

@@ -3,35 +3,24 @@ package org.alessiodm.ringer.web.api.v1.controller;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.alessiodm.ringer.dao.UserDao;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.util.RingerAPIException;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.WebRequest;
 
-/**
- * Controller Advice is useful for handling exceptions in one place for 
- * all application controllers and to have global @ModelAttribute and 
- * @InitBinding stuff.
- * 
- * We're using it in order to get the userId based on the token passed to
- * the API, in a OAuth-like manner.
- * 
- * @author alessio
- */
-@ControllerAdvice
-public class RingerControllerAdvice {
+public abstract class BaseController {
     
-    private final static Logger log = Logger.getLogger(RingerControllerAdvice.class);
+    private final static Logger log = Logger.getLogger(BaseController.class);
     
     @Autowired
     private AuthService authService;
@@ -43,11 +32,10 @@ public class RingerControllerAdvice {
     }
     
     @ExceptionHandler(RingerAPIException.class)
-    public void ringerAPIExceptionHandler(RingerAPIException ex, HttpServletResponse response) throws IOException{
-        log.info("Got a " + ex.getClass().getSimpleName() + " : " + ex.getLocalizedMessage());
-        response.sendError(HttpStatus.NOT_ACCEPTABLE.value(), ex.getMessage());
+    public ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
+        return new ResponseEntity(ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.CONFLICT);
     }
-    
+ 
     /**
      * Get the ID of the user the token belongs to.
      * 
@@ -61,5 +49,4 @@ public class RingerControllerAdvice {
         model.addAttribute("token", token);
         model.addAttribute("user", user); 
     }
-    
 }

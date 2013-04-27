@@ -18,9 +18,7 @@
     <bean id="ringService" class="org.alessiodm.ringer.service.RingService"/>
     
     <!-- Controllers -->
-    <bean id="userController" class="org.alessiodm.ringer.web.api.v1.controller.UserController"/>
-    <bean id="ringController" class="org.alessiodm.ringer.web.api.v1.controller.RingController"/>
-    <bean id="relationController" class="org.alessiodm.ringer.web.api.v1.controller.RelationController"/>
+    <context:component-scan base-package="org.alessiodm.ringer.web.api.v1.controllers" />
     
     <!-- Dao classes to autowire -->
     <bean id="userDaoImpl" class="org.alessiodm.ringer.dao.impl.UserDaoImpl"> 
