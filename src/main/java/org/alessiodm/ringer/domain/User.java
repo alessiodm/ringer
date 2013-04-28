@@ -40,6 +40,9 @@ public class User {
     }
     
     public void stopFollowing(User u){
+        if (!userRepository.follows(this, u)){
+            throw RingerException.RELATION_ALREADY_EXISTS;
+        }
         userRepository.deleteRelation(this, u);
     }
     

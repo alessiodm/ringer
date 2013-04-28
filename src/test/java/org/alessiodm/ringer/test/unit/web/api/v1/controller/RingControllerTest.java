@@ -4,6 +4,7 @@ import java.util.HashMap;
 import org.alessiodm.ringer.domain.Ring;
 import org.alessiodm.ringer.domain.RingerException;
 import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.alessiodm.ringer.web.api.v1.controller.RingController;
 import org.alessiodm.ringer.web.api.v1.dto.ListOfRings;
@@ -23,13 +24,13 @@ public class RingControllerTest extends AbstractUnitControllerTest {
     private RingController ringController;
     
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
     
     private User u1;
     
     @Before
     public void setUp(){
-        u1 = userDao.findById(1L);
+        u1 = userRepository.findUserById(1L);
     }
     
     @Test

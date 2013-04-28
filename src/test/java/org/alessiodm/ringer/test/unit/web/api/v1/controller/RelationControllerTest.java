@@ -74,8 +74,8 @@ public class RelationControllerTest extends AbstractUnitControllerTest {
         assertEquals("Number of rings expected different", 2, i.intValue());
     }
     
-    @Test 
+    @Test(expected=RingerException.class)
     public void testUnfollowNotFollowing(){
-        assertEquals(SimpleResult.ResultType.ERROR, relController.unfollow(5L, u1).getResult());
+        relController.unfollow(5L, u1).getResult();
     }
 }

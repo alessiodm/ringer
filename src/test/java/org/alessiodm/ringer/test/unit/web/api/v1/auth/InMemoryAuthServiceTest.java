@@ -10,7 +10,6 @@ import org.junit.Test;
 
 public class InMemoryAuthServiceTest {
     
-    @Ignore
     @Test(expected = RuntimeException.class)
     public void testUUIDConflictError() {
         UUIDGenerator gen = EasyMock.createMock(UUIDGenerator.class);

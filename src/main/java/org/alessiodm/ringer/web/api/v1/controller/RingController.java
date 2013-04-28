@@ -2,6 +2,7 @@ package org.alessiodm.ringer.web.api.v1.controller;
 
 import java.util.List;
 import org.alessiodm.ringer.domain.Ring;
+import org.alessiodm.ringer.domain.RingerException;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.domain.repository.RingRepository;
 import org.alessiodm.ringer.service.RingService;
@@ -63,6 +64,9 @@ public class RingController extends BaseController {
     @RequestMapping(value = "/api/v1/secure/rings/delete/{ringId}", method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
     public @ResponseBody SimpleResult deleteRing(@PathVariable Long ringId, @ModelAttribute("user") User user){
         Ring r = ringRepository.findRingById(ringId);
+        if (r == null){
+            throw RingerException.NOT_USERS_RING;
+        }
         ringService.deleteUserRing(r, user);
         return new SimpleResult(SimpleResult.ResultType.OKEY);
     }
