@@ -58,7 +58,7 @@ public class UserService {
      
     @Transactional
     public int startFollowing(Long id, Long newFollowed){
-        if (relationDao.follows(id, newFollowed)){
+        if (id == newFollowed || relationDao.follows(id, newFollowed)){
             throw RingerAPIException.RELATION_ALREADY_EXISTS;
         }
         return relationDao.createRelation(id, newFollowed);

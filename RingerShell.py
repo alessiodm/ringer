@@ -95,6 +95,7 @@ def logout():
 		
 
 def registerNewUser():
+	global TOKEN
 	headers = { "Content-Type" : "application/json" }
 	req = {}
 	print "You're going to register a new user and login with its credentials:"
