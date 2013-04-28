@@ -34,7 +34,7 @@ public class UserController extends BaseController {
     
     @RequestMapping(value = "/api/v1/secure/user/delete", method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
     public @ResponseBody SimpleResult destroy(@ModelAttribute("user") User user){
-        int result = userService.deleteUser(user.getId());
+        int result = userService.deleteUser(user);
         if (result != 1){
             return new SimpleResult(ResultType.ERROR, "Result code: " + result);
         }

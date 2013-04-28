@@ -3,7 +3,7 @@ package org.alessiodm.ringer.web.api.v1.controller;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import org.alessiodm.ringer.domain.User;
-import org.alessiodm.ringer.util.RingerAPIException;
+import org.alessiodm.ringer.domain.RingerException;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.alessiodm.ringer.web.api.v1.dto.SimpleResult;
 import org.apache.log4j.Logger;
@@ -31,7 +31,7 @@ public abstract class BaseController {
         log.warn("Got a " + ex.getClass().getSimpleName() + " : " + ex.getLocalizedMessage());
     }
     
-    @ExceptionHandler(RingerAPIException.class)
+    @ExceptionHandler(RingerException.class)
     public ResponseEntity<SimpleResult> handleConflict(RuntimeException ex, WebRequest request) {
         SimpleResult result = new SimpleResult(SimpleResult.ResultType.ERROR, ex.getMessage());
         return new ResponseEntity<SimpleResult>(result, new HttpHeaders(), HttpStatus.OK);

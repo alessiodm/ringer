@@ -4,7 +4,7 @@ import java.util.HashMap;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.alessiodm.ringer.domain.Ring;
 import org.alessiodm.ringer.domain.User;
-import org.alessiodm.ringer.util.RingerAPIException;
+import org.alessiodm.ringer.domain.RingerException;
 import org.alessiodm.ringer.web.api.v1.controller.RingController;
 import org.alessiodm.ringer.web.api.v1.dto.ListOfRings;
 import org.alessiodm.ringer.web.api.v1.dto.RingContent;
@@ -47,12 +47,12 @@ public class RingControllerTest extends AbstractUnitControllerTest {
         assertEquals("Ring 2 User 1", ring.getContent());
     }
     
-    @Test(expected = RingerAPIException.class)
+    @Test(expected = RingerException.class)
     public void testDeleteRingDoesntExist(){
         ringController.deleteRing(72L, u1);
     }
     
-    @Test(expected = RingerAPIException.class)
+    @Test(expected = RingerException.class)
     public void testDeleteRingNotBelongingToUser(){
         ringController.deleteRing(7L, u1);
     }

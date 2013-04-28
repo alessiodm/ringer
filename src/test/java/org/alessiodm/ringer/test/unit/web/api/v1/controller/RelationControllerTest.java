@@ -3,7 +3,7 @@ package org.alessiodm.ringer.test.unit.web.api.v1.controller;
 import java.util.HashMap;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.alessiodm.ringer.domain.User;
-import org.alessiodm.ringer.util.RingerAPIException;
+import org.alessiodm.ringer.domain.RingerException;
 import org.alessiodm.ringer.web.api.v1.controller.RelationController;
 import org.alessiodm.ringer.web.api.v1.dto.ListOfUsers;
 import org.alessiodm.ringer.web.api.v1.dto.SimpleResult;
@@ -61,7 +61,7 @@ public class RelationControllerTest extends AbstractUnitControllerTest {
         assertEquals("Number of rings expected different", 4, i.intValue());
     }
     
-    @Test(expected=RingerAPIException.class)
+    @Test(expected=RingerException.class)
     public void testFollowAlreadyFollow(){
         assertEquals(SimpleResult.ResultType.ERROR, relController.follow(2L, u1).getResult());
     }

@@ -4,7 +4,6 @@ import java.util.List;
 import org.alessiodm.ringer.domain.Ring;
 import org.alessiodm.ringer.domain.User;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface RingRepository {

@@ -60,4 +60,18 @@ public class UserRepositoryJdbc implements UserRepository {
         return u;
     }
     
+    @Override
+    @Transactional public int createRelation(User u1, User u2) {
+        return relationDao.createRelation(u1.getId(), u2.getId());
+    }
+
+    @Override
+    @Transactional public int deleteRelation(User u1, User u2) {
+        return relationDao.deleteRelation(u1.getId(), u2.getId());
+    }
+    
+    @Override
+    public boolean follows(User u1, User u2){
+        return relationDao.follows(u1.getId(), u2.getId());
+    }
 }

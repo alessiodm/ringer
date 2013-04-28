@@ -41,20 +41,7 @@ public class SimpleResult {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    public static SimpleResult getSimpleResultFromExpectedInt(int expected, int actual){
-        return getSimpleResultFromExpectedInt(expected, actual, "", "");
-    }
-    
-    public static SimpleResult getSimpleResultFromExpectedInt(int expected, int actual, String okeyMessage, String errorMessage){
-        if (expected != actual){
-            return new SimpleResult(SimpleResult.ResultType.ERROR, errorMessage);
-        }
-        else{
-            return new SimpleResult(SimpleResult.ResultType.OKEY, okeyMessage);
-        }
-    }
-    
+   
     @XmlEnum
     @XmlType(name = "")
     public static enum ResultType implements Serializable {

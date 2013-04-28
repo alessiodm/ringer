@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class RelationController extends BaseController {
     
-    @Autowired
-    UserService userService;
+    private @Autowired UserService userService;
     
     @RequestMapping(value = "/api/v1/secure/relations/followers/list", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
     public @ResponseBody ListOfUsers followersList(@RequestParam(value = "page", required = false) Integer page,
@@ -27,7 +26,7 @@ public class RelationController extends BaseController {
         page = page == null ? 0 : page;
         perPage = perPage == null ? 10 : perPage;
         
-        List<User> followers = userService.getFollowers(user.getId(), page, perPage);
+        List<User> followers = user.getFollowers(page, perPage);
         
         ListOfUsers list = new ListOfUsers();
         list.setUsers(followers);
@@ -41,8 +40,8 @@ public class RelationController extends BaseController {
         page = page == null ? 0 : page;
         perPage = perPage == null ? 10 : perPage;
         
-        List<User> followers = userService.getFollowing(user.getId(), page, perPage);
-        
+        List<User> followers = user.getFollowing(page, perPage);
+                
         ListOfUsers list = new ListOfUsers();
         list.setUsers(followers);
         return list;
@@ -50,14 +49,16 @@ public class RelationController extends BaseController {
 
     @RequestMapping(value = "/api/v1/secure/relations/following/add/{fId}", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
     public @ResponseBody SimpleResult follow(@PathVariable Long fId, @ModelAttribute("user") User user){
-        int result = userService.startFollowing(user.getId(), fId);
-        return SimpleResult.getSimpleResultFromExpectedInt(1, result);
+        User followed = userService.getUserById(fId);
+        user.startFollowing(followed);
+        return new SimpleResult(SimpleResult.ResultType.OKEY);
     }
     
     @RequestMapping(value = "/api/v1/secure/relations/following/remove/{fId}", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
     public @ResponseBody SimpleResult unfollow(@PathVariable Long fId, @ModelAttribute("user") User user){
-        int result = userService.stopFollowing(user.getId(), fId);
-        return SimpleResult.getSimpleResultFromExpectedInt(1, result);
+        User followed = userService.getUserById(fId);
+        user.stopFollowing(followed);
+        return new SimpleResult(SimpleResult.ResultType.OKEY);
     }
 
 }

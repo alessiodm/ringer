@@ -26,6 +26,13 @@ public class Ring {
     @XmlElement
     private Date timestamp;
     
+    
+    public boolean belongsTo(User u){
+        return u.getId() == userId;
+    }
+    
+    // ----- POJO part ----
+    
     public Long getId() {
         return id;
     }

@@ -13,5 +13,8 @@ public interface UserRepository {
     public User createUser(String username, String password);
     public List<User> getFollowers(User u, int page, int perPage);
     public List<User> getFollowing(User u, int page, int perPage);
-            
+    public int createRelation(User u1, User u2);
+    public int deleteRelation(User u1, User u2);
+    public boolean follows(User u1, User u2);
+
 }

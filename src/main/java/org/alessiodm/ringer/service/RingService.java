@@ -1,9 +1,10 @@
 package org.alessiodm.ringer.service;
 
 import java.util.List;
-import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.alessiodm.ringer.domain.Ring;
-import org.alessiodm.ringer.util.RingerAPIException;
+import org.alessiodm.ringer.domain.RingerException;
+import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.repository.RingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,12 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RingService {
 
-    @Autowired
-    private RingDao ringDao;
+    private @Autowired RingRepository ringRepository;
     
     @Transactional
     public Ring showRingDetails(Long ringId){
-        return ringDao.findById(ringId);
+        return ringRepository.findRingById(ringId);
     }
     
     /**
@@ -27,11 +27,8 @@ public class RingService {
      * @return The Ring
      */
     @Transactional
-    public Ring createRing(String content, Long userId){
-        Ring r =  ringDao.createRing(userId);
-        ringDao.createRingContent(r.getId(), content);
-        r.setContent(content);
-        return r;
+    public Ring createRing(User u, String content){
+        return ringRepository.createRing(u, content);
     }
     
     
@@ -43,16 +40,15 @@ public class RingService {
      * @return Delete result
      */
     @Transactional
-    public int deleteUserRing(Long ringId, Long userId){
-        if (!ringDao.belongsToUser(ringId, userId)){
-            throw RingerAPIException.NOT_USERS_RING;
+    public int deleteUserRing(Ring r, User u){
+        if (!r.belongsTo(u)){
+            throw RingerException.NOT_USERS_RING;
         }
-        ringDao.deleteRingContent(ringId);
-        return ringDao.deleteRing(ringId);
+        return ringRepository.deleteRing(r);
     }
     
     @Transactional
-    public List<Ring> getRingsList(Long userId, String keyword, int page, int perPage){
-        return ringDao.listRings(userId, keyword, page, perPage);
+    public List<Ring> getRingsList(User u, String keyword, int page, int perPage){
+        return ringRepository.getRingsList(u, keyword, page, perPage);
     }
 }
