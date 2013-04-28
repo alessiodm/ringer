@@ -28,8 +28,8 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
-    <bean id="userRepo" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.UserRepositoryJdbc"/> 
-    <bean id="ringRepo" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.RingRepositoryJdbc"/>  
+    <bean id="userRepository" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.UserRepositoryJdbc"/> 
+    <bean id="ringRepository" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.RingRepositoryJdbc"/>  
     
     <!--
        Getiing things done with Heroku

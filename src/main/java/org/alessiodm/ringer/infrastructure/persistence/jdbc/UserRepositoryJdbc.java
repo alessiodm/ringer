@@ -7,10 +7,8 @@ import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
 public class UserRepositoryJdbc implements UserRepository {
 
     private @Autowired AutowireCapableBeanFactory beanFactory;

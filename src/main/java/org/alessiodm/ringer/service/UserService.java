@@ -3,7 +3,6 @@ package org.alessiodm.ringer.service;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.domain.RingerException;
 import org.alessiodm.ringer.domain.repository.UserRepository;
-import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

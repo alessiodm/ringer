@@ -5,15 +5,13 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class RelationDaoImpl extends NamedParameterJdbcDaoSupport implements RelationDao {
 
     private RowMapper<User> userFullMapper = new RowMapper<User>() {

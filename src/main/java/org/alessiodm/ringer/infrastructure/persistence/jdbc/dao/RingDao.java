@@ -2,11 +2,12 @@ package org.alessiodm.ringer.infrastructure.persistence.jdbc.dao;
 
 import java.util.List;
 import org.alessiodm.ringer.domain.Ring;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-/**
- *
- * @author alessio
- */
+
+@Component
+@Scope(value="prototype")
 public interface RingDao {
     
     public int createRingContent(Long ringId, String content);

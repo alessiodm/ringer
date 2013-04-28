@@ -2,11 +2,11 @@ package org.alessiodm.ringer.infrastructure.persistence.jdbc.dao;
 
 import java.util.List;
 import org.alessiodm.ringer.domain.User;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-/**
- *
- * @author alessio
- */
+@Component
+@Scope(value="prototype")
 public interface RelationDao {
     
     public int createRelation(Long followerId, Long followedId);
