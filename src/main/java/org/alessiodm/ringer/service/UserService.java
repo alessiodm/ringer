@@ -31,7 +31,7 @@ public class UserService {
     @Transactional
     public User getUserDetails(String username){
         User u = userDao.findByUsername(username);
-        if (u != null){
+        if (u == null){
             throw RingerAPIException.USERNAME_NOT_AVAILABLE;
         }
         return u;

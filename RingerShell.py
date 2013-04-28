@@ -170,6 +170,18 @@ def unfollow():
 		print "Do login and get a token first"
 		return
 
+def showUser():
+	if TOKEN:
+		username = raw_input("Insert the username of the user to show: ")
+		conn = http.HTTPConnection(RINGER_API_HOST)
+		conn.request('GET', '/api/v1/secure/user/show/{0}?token={1}'.format(username, TOKEN)) 
+		resp = conn.getresponse()
+		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
+	else:
+		print "Do login and get a token first"
+		return
+
 def listFollowers():
 	print "UNFOLLOW"
 
@@ -187,6 +199,7 @@ ops = {
 				"register": registerNewUser,
 				"unregister": unregister,
 				"new ring": ringOut,
+				"show user": showUser,
 				"list rings": listRings,
 				"search": searchRings,
 				"follow": follow,
