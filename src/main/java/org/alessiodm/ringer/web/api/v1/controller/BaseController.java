@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.util.RingerAPIException;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
+import org.alessiodm.ringer.web.api.v1.dto.SimpleResult;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -31,8 +32,9 @@ public abstract class BaseController {
     }
     
     @ExceptionHandler(RingerAPIException.class)
-    public ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-        return new ResponseEntity("", new HttpHeaders(), HttpStatus.CONFLICT);
+    public ResponseEntity<SimpleResult> handleConflict(RuntimeException ex, WebRequest request) {
+        SimpleResult result = new SimpleResult(SimpleResult.ResultType.ERROR, ex.getMessage());
+        return new ResponseEntity<SimpleResult>(result, new HttpHeaders(), HttpStatus.OK);
     }
  
     /**

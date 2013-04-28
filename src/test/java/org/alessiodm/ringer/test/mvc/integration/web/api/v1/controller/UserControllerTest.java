@@ -36,6 +36,7 @@ public class UserControllerTest extends AbstractMvcIntegrationControllerTest {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(req)
                  )
-                 .andExpect(status().is(HttpStatus.CONFLICT.value()));
+                 .andExpect(status().is(HttpStatus.OK.value()))
+                 .andExpect(jsonPath("$.result").value("ERROR"));;
     }
 }

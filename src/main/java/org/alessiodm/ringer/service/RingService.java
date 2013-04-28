@@ -3,6 +3,7 @@ package org.alessiodm.ringer.service;
 import java.util.List;
 import org.alessiodm.ringer.dao.RingDao;
 import org.alessiodm.ringer.domain.Ring;
+import org.alessiodm.ringer.util.RingerAPIException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +19,36 @@ public class RingService {
         return ringDao.findById(ringId);
     }
     
+    /**
+     * Creation of a Ring and its content.
+     * 
+     * @param content Ring content
+     * @param userId  User ringing
+     * @return The Ring
+     */
     @Transactional
     public Ring createRing(String content, Long userId){
-        return ringDao.createRing(userId, content);
+        Ring r =  ringDao.createRing(userId);
+        ringDao.createRingContent(r.getId(), content);
+        r.setContent(content);
+        return r;
     }
     
+    
+    /**
+     * Delete a ring only if it belongs to the user.
+     * 
+     * @param ringId Ring to delete
+     * @param userId User who should ringed out the ring
+     * @return Delete result
+     */
     @Transactional
     public int deleteRing(Long ringId, Long userId){
-        return ringDao.deleteRing(ringId, userId);
+        if (!ringDao.belongsToUser(ringId, userId)){
+            throw RingerAPIException.NOT_USERS_RING;
+        }
+        ringDao.deleteRingContent(ringId);
+        return ringDao.deleteRing(ringId);
     }
     
     @Transactional

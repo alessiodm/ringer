@@ -8,6 +8,9 @@ public class RingerAPIException extends RuntimeException {
     public static final RingerAPIException RELATION_ALREADY_EXISTS = 
             new RingerAPIException("Relation already exists");
     
+    public static final RingerAPIException NOT_USERS_RING = 
+            new RingerAPIException("The ring does not belong to user");
+    
     private RingerAPIException(){
         super();
     }

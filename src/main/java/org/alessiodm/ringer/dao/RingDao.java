@@ -9,9 +9,12 @@ import org.alessiodm.ringer.domain.Ring;
  */
 public interface RingDao {
     
-    public Ring createRing(Long userId, String content);
+    public int createRingContent(Long ringId, String content);
+    public Ring createRing(Long userId);
     public Ring findById(Long ringId);
-    public int deleteRing(Long ringId, Long userId);
+    public int deleteRing(Long ringId);
+    public int deleteRingContent(Long ringId);
+    public boolean belongsToUser(Long ringId, Long userId);
     public List<Ring> listRings(Long userId, String keyword, int page, int perPage);
     
 }

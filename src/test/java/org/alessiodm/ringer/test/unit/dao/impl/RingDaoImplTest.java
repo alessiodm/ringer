@@ -21,19 +21,22 @@ public class RingDaoImplTest extends AbstractDaoTest {
     
     @Test
     public void testCreateRing(){
-        final String content = "Try creating a new ring, yuppy!";
-        Ring ring = ringDao.createRing(3L, content);
+        Ring ring = ringDao.createRing(3L);
         assertNotNull("Ring null", ring);
         assertNotNull("Timestamp null", ring.getTimestamp());
-        assertEquals("Content not expected", content, ring.getContent());
+        assertEquals("Content not expected", null, ring.getContent());
         assertEquals("User not expected", 3L, ring.getUserId().longValue());
+        
+        // Need to create the content in order to find the ring
+        ringDao.createRingContent(ring.getId(), "content");
+        
         Ring ring1 = ringDao.findById(ring.getId());
         assertEquals("Rings are not the same", ring, ring1);
     }
     
     @Test 
     public void testDeleteRing(){
-        ringDao.deleteRing(1L, 1L);
+        ringDao.deleteRing(1L);
         Ring ring = ringDao.findById(1L);
         assertNull("Expected null", ring);
     }
@@ -55,6 +58,13 @@ public class RingDaoImplTest extends AbstractDaoTest {
             int j = i + 2;
             assertEquals("Order broken " + j, (long) j, rings.get(5 - i).getId().longValue());
         }
+    }
+    
+    @Test
+    public void testBelongsToUser(){
+        assertTrue(ringDao.belongsToUser(1L, 1L));
+        assertFalse(ringDao.belongsToUser(2L, 2L));
+        assertTrue(ringDao.belongsToUser(5L, 2L));
     }
     
     @Test(expected=RuntimeException.class)

@@ -33,14 +33,23 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
         };
     
     @Override
-    public Ring createRing(Long userId, String content) {
-        String sql = "insert into T_RING (user_id, content, timestamp) values (:userId, :content, :timestamp)";
+    public int createRingContent(Long ringId, String content) {
+        String sql = "insert into T_RING_CONTENT (id, content) values (:ringId, :content)";
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                                            .addValue("ringId", ringId)
+                                            .addValue("content", content);
+        
+        return getNamedParameterJdbcTemplate().update(sql, parameters);
+    }
+    
+    @Override
+    public Ring createRing(Long userId) {
+        String sql = "insert into T_RING (user_id, timestamp) values (:userId, :timestamp)";
         Date timestamp = new Date();
         
         KeyHolder keyHolder = new GeneratedKeyHolder();
         SqlParameterSource parameters = new MapSqlParameterSource()
                                             .addValue("userId", userId)
-                                            .addValue("content", content)
                                             .addValue("timestamp", timestamp);
         
         getNamedParameterJdbcTemplate().update(sql, parameters, keyHolder);
@@ -49,14 +58,15 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
         r.setId(keyHolder.getKey().longValue());
         r.setUserId(userId);
         r.setTimestamp(timestamp);
-        r.setContent(content);
         
         return r;
     }
 
     @Override
     public Ring findById(Long ringId) {
-        String sql = "select id, user_id, content, timestamp from T_RING where id = :id";
+        String sql = "select r.id, r.user_id, c.content, r.timestamp "
+                    + "from T_RING as r inner join T_RING_CONTENT as c on (r.id = c.id) "
+                    + "where r.id = :id ";
 
         Map<String, Object> parameters = new HashMap<String, Object>(1);
         parameters.put("id", ringId);
@@ -66,11 +76,17 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
     }
 
     @Override
-    public int deleteRing(Long ringId, Long userId) {
-        Map<String, Object> parameters = new HashMap<String, Object>(2);
+    public int deleteRingContent(Long ringId){
+        Map<String, Object> parameters = new HashMap<String, Object>(1);
         parameters.put("id", ringId);
-        parameters.put("userId", userId);
-        return getNamedParameterJdbcTemplate().update("delete from T_RING where id = :id and user_id = :userId", parameters);
+        return getNamedParameterJdbcTemplate().update("delete from T_RING_CONTENT where id = :id", parameters);
+    }
+    
+    @Override
+    public int deleteRing(Long ringId) {
+        Map<String, Object> parameters = new HashMap<String, Object>(1);
+        parameters.put("id", ringId);
+        return getNamedParameterJdbcTemplate().update("delete from T_RING where id = :id", parameters);
     }
 
     @Override
@@ -79,14 +95,16 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
         perPage = perPage < 0 ? 10 : perPage; 
         int offset = perPage * page;
         
-        String matchSql = " and match(ring.content) against(:keyword in boolean mode) ";
-        String sql = " select ring.id, ring.user_id, ring.content, ring.timestamp "
+        String matchSql = " and match(rc.content) against(:keyword in boolean mode) ";
+        String sql = " select ring.id, ring.user_id, rc.content, ring.timestamp "
                     + "from T_RING as ring "
-                    + "    join T_RELATION as rel on (ring.user_id = rel.followed_id) "
+                    + "    inner join T_RING_CONTENT as rc on (ring.id = rc.id)"
+                    + "    inner join T_RELATION as rel on (ring.user_id = rel.followed_id) "
                     + "where rel.follower_id = :userId %s "
                     + "  union "    
-                    + "select ring.id, ring.user_id, ring.content, ring.timestamp "
+                    + "select ring.id, ring.user_id, rc.content, ring.timestamp "
                     + "from T_RING as ring "
+                    + "    inner join T_RING_CONTENT as rc on (ring.id = rc.id)"
                     + "where ring.user_id = :userId %s "
                     + "order by timestamp desc "
                     + "limit :offset, :perPage ";
@@ -106,5 +124,16 @@ public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao
         
         return getNamedParameterJdbcTemplate().query(sql, parameters, ringFullMapper);
     }
-    
+
+    @Override
+    public boolean belongsToUser(Long ringId, Long userId) {
+        String sql = "select count(*) from T_RING where id = :ringId and user_id = :userId";
+        Map<String, Object> parameters = new HashMap<String, Object>(2);
+        parameters.put("ringId", ringId);
+        parameters.put("userId", userId);
+        Integer count = getNamedParameterJdbcTemplate().queryForObject(sql, parameters, Integer.class);
+        
+        return (count != null && count > 0);
+    }
+
 }
