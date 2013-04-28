@@ -21,16 +21,19 @@
     <context:component-scan base-package="org.alessiodm.ringer.web.api.v1.controllers" />
     
     <!-- Dao classes to autowire -->
-    <bean id="userDaoImpl" class="org.alessiodm.ringer.dao.impl.UserDaoImpl"> 
+    <bean id="userDaoImpl" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl.UserDaoImpl"> 
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="relationDaoImpl" class="org.alessiodm.ringer.dao.impl.RelationDaoImpl"> 
+    <bean id="relationDaoImpl" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl.RelationDaoImpl"> 
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="ringDaoImpl" class="org.alessiodm.ringer.dao.impl.RingDaoImpl"> 
+    <bean id="ringDaoImpl" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl.RingDaoImpl"> 
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
+    <bean id="userRepo" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.UserRepositoryJdbc"/> 
+    <bean id="ringRepo" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.RingRepositoryJdbc"/>  
+                
     <!-- Configuring embedded datasource and declarative annotation-driven transactions -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

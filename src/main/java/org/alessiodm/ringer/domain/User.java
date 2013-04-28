@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.alessiodm.ringer.domain.repository.RelationRepository;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +29,16 @@ public class User {
     private String encPassword;
     
     private @Autowired UserRepository userRepository;
-    private @Autowired RelationRepository relationRepository;
     
     public void startFollowing(User u){
         if (amIFollowing(u) == true){
             throw RingerException.RELATION_ALREADY_EXISTS;
         }
-        relationRepository.createRelation(this, u);
+        userRepository.createRelation(this, u);
     }
     
     public void stopFollowing(User u){
-        relationRepository.deleteRelation(this, u);
+        userRepository.deleteRelation(this, u);
     }
     
     public List<User> getFollowers(int offset, int number){

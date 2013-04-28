@@ -18,15 +18,18 @@
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
 
-    <bean id="userDaoImpl" class="org.alessiodm.ringer.dao.impl.UserDaoImpl"> 
+    <bean id="userDaoImpl" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl.UserDaoImpl"> 
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="relationDaoImpl" class="org.alessiodm.ringer.dao.impl.RelationDaoImpl"> 
+    <bean id="relationDaoImpl" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl.RelationDaoImpl"> 
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="ringDaoImpl" class="org.alessiodm.ringer.dao.impl.RingDaoImpl"> 
+    <bean id="ringDaoImpl" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl.RingDaoImpl"> 
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    
+    <bean id="userRepo" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.UserRepositoryJdbc"/> 
+    <bean id="ringRepo" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.RingRepositoryJdbc"/>  
     
     <!--
        Getiing things done with Heroku
