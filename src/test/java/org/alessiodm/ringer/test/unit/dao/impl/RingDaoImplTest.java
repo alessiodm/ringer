@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.test.unit.dao.impl;
 
 import java.util.List;
-import org.alessiodm.ringer.dao.RingDao;
+import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.alessiodm.ringer.domain.Ring;
 import static org.junit.Assert.*;
 import org.junit.Test;

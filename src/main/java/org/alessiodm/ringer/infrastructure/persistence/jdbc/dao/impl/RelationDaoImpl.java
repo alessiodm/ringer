@@ -1,11 +1,11 @@
-package org.alessiodm.ringer.dao.impl;
+package org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.alessiodm.ringer.dao.RelationDao;
+import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.alessiodm.ringer.domain.User;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

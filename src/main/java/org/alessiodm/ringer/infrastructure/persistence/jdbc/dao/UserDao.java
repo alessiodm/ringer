@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.dao;
+package org.alessiodm.ringer.infrastructure.persistence.jdbc.dao;
 
 import org.alessiodm.ringer.domain.User;
 

@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.test.unit.dao.impl;
 
-import org.alessiodm.ringer.dao.UserDao;
+import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.util.MD5Util;
 import org.apache.log4j.Logger;

@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.web.api.v1.auth;
 
 import java.util.concurrent.ConcurrentHashMap;
-import org.alessiodm.ringer.dao.UserDao;
+import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.alessiodm.ringer.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

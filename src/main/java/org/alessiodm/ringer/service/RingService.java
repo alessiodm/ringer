@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.service;
 
 import java.util.List;
-import org.alessiodm.ringer.dao.RingDao;
+import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.alessiodm.ringer.domain.Ring;
 import org.alessiodm.ringer.util.RingerAPIException;
 import org.springframework.beans.factory.annotation.Autowired;
