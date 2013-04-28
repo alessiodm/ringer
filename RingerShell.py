@@ -14,10 +14,8 @@ import httplib as http
 import json
 import traceback
 
-from pprint import pprint
-
-# Parametri di default di connessione al DB
-RINGER_API_HOST='ringer-sta.herokuapp.com'
+RINGER_SHELL_VERSION = "0.1.0"
+RINGER_API_HOST = 'ringer-sta.herokuapp.com'
 TOKEN = None
 
 
@@ -29,11 +27,10 @@ def xstr(s):
         return str(s)
 
 def main():
-	print "--------------------------------"
-	print "      RINGER CLIENT             "
-	print "--------------------------------"
-	print "Type 'help' for command list"
 	print
+	print "Ringer Shell (version {0})".format(RINGER_SHELL_VERSION)
+	print "Type 'help' for command list ('exit' to terminate...)"
+	
 
 	choice = "__none__"
 	while choice != "exit":
@@ -41,11 +38,9 @@ def main():
 			choice = raw_input("ringer> ")	
 			if choice == "exit": break
 			dispatchOp(choice)
-		except Exception as e:
+		except:
 			traceback.print_exc()
-			print "Runtime error:" + e
-			print "Please try again..."
-			print
+			print "Runtime error, please try again..."
 	
 	print "Good bye!"
 	print
@@ -54,9 +49,7 @@ def main():
 
 
 def printHelp():
-	print "Available commands:"
-	print ops.keys()
-	print "Type 'exit' to terminate..."
+	print "Available commands: {0}".format(sorted(ops.keys()))
 	print
 
 		 
@@ -138,6 +131,12 @@ def follow():
 def unfollow():
 	print "UNFOLLOW"
 
+def listFollowers():
+	print "UNFOLLOW"
+
+def listFollowing():
+	print "UNFOLLOW"
+
 def changeServer():
 	print "Change server"
 
@@ -150,10 +149,12 @@ ops = {
 				"register": registerNewUser,
 				"unregister": unregister,
 				"ringOut": ringOut,
-				"list": listRings,
+				"list rings": listRings,
 				"search": searchRings,
 				"follow": follow,
 				"unfollow": unfollow,
+				"list followers": listFollowers,
+				"list following": listFollowing,
 				"changeServer": changeServer,
 				"help": printHelp
 			 }
