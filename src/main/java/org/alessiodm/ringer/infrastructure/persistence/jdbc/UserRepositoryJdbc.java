@@ -6,21 +6,28 @@ import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 public class UserRepositoryJdbc implements UserRepository {
 
-    @Autowired protected UserDao userDao;
-    @Autowired protected RelationDao relationDao;
+    private @Autowired AutowireCapableBeanFactory beanFactory;
+    
+    protected @Autowired UserDao userDao;
+    protected @Autowired RelationDao relationDao;
     
     @Override
     public User findUserById(Long id) {
-        return userDao.findById(id);
+        User u = userDao.findById(id);
+        beanFactory.autowireBean(u);
+        return u;
     }
 
     @Override
     public User findUserByUsername(String username) {
-        return userDao.findByUsername(username);
+        User u = userDao.findByUsername(username);
+        beanFactory.autowireBean(u);
+        return u;
     }
 
     @Override
@@ -30,17 +37,27 @@ public class UserRepositoryJdbc implements UserRepository {
 
     @Override
     public List<User> getFollowers(User u, int page, int perPage) {
-        return relationDao.listFollowers(u.getId(), page, perPage);
+        List<User> users = relationDao.listFollowers(u.getId(), page, perPage);
+        for (User _u : users){
+            beanFactory.autowireBean(_u);
+        }
+        return users;
     }
 
     @Override
     public List<User> getFollowing(User u, int page, int perPage) {
-        return relationDao.listFollowing(u.getId(), page, perPage);
+        List<User> users = relationDao.listFollowing(u.getId(), page, perPage);
+        for (User _u : users){
+            beanFactory.autowireBean(_u);
+        }
+        return users;
     }
 
     @Override
     @Transactional public User createUser(String username, String password) {
-        return userDao.createUser(username, password);
+        User u = userDao.createUser(username, password);
+        beanFactory.autowireBean(u);
+        return u;
     }
     
 }

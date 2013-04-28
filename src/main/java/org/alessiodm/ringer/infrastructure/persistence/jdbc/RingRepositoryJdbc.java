@@ -6,11 +6,14 @@ import org.alessiodm.ringer.domain.repository.RingRepository;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 public class RingRepositoryJdbc implements RingRepository {
 
-    @Autowired protected RingDao ringDao;
+    private @Autowired AutowireCapableBeanFactory beanFactory;
+    
+    protected @Autowired RingDao ringDao;
     
     @Override
     public Ring findRingById(Long ringId) {
@@ -22,6 +25,7 @@ public class RingRepositoryJdbc implements RingRepository {
         Ring r =  ringDao.createRing(u.getId());
         ringDao.createRingContent(r.getId(), content);
         r.setContent(content);
+        beanFactory.autowireBean(r);
         return r;
     }
 

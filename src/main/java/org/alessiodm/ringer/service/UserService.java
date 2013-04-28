@@ -1,9 +1,9 @@
 package org.alessiodm.ringer.service;
 
 import java.util.List;
+import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
-import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.util.RingerAPIException;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;

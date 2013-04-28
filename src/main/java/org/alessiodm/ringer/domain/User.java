@@ -25,6 +25,9 @@ public class User {
     @JsonIgnore
     private String encPassword;
     
+    
+    // ----- Start POJO part -----
+    
     public Long getId() {
         return id;
     }
