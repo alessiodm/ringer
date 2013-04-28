@@ -15,7 +15,7 @@ public class RingService {
     private RingDao ringDao;
     
     @Transactional
-    public Ring showRing(Long ringId){
+    public Ring showRingDetails(Long ringId){
         return ringDao.findById(ringId);
     }
     
@@ -43,7 +43,7 @@ public class RingService {
      * @return Delete result
      */
     @Transactional
-    public int deleteRing(Long ringId, Long userId){
+    public int deleteUserRing(Long ringId, Long userId){
         if (!ringDao.belongsToUser(ringId, userId)){
             throw RingerAPIException.NOT_USERS_RING;
         }

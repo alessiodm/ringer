@@ -44,7 +44,7 @@ public class RingController extends BaseController {
     
     @RequestMapping(value = "/api/v1/secure/rings/show/{ringId}", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
     public @ResponseBody Ring showRing(@PathVariable Long ringId, @ModelAttribute("user") User user){
-        return ringService.showRing(ringId);
+        return ringService.showRingDetails(ringId);
     }
 
     @RequestMapping(value = "/api/v1/secure/rings/create", method = RequestMethod.POST, produces = {"application/json", "application/xml"})
@@ -54,7 +54,7 @@ public class RingController extends BaseController {
     
     @RequestMapping(value = "/api/v1/secure/rings/delete/{ringId}", method = RequestMethod.DELETE, produces = {"application/json", "application/xml"})
     public @ResponseBody SimpleResult deleteRing(@PathVariable Long ringId, @ModelAttribute("user") User user){
-        int result = ringService.deleteRing(ringId, user.getId());
+        int result = ringService.deleteUserRing(ringId, user.getId());
         
         return SimpleResult.getSimpleResultFromExpectedInt(1, result);
     }
