@@ -1,6 +1,7 @@
 package org.alessiodm.ringer.test.unit.web.api.v1.controller;
 
 import java.util.HashMap;
+import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.web.api.v1.controller.UserController;
 import org.alessiodm.ringer.web.api.v1.dto.AuthToken;
 import org.alessiodm.ringer.web.api.v1.dto.SimpleResult;
@@ -33,7 +34,10 @@ public class UserControllerTest extends AbstractUnitControllerTest {
     
     @Test
     public void testUserDeletion() {
-        SimpleResult result = userController.destroy(1L);
+        User user = new User();
+        user.setId(1L);
+        
+        SimpleResult result = userController.destroy(user);
         assertEquals(result.getResult(), SimpleResult.ResultType.OKEY);
         Integer i = jt.queryForObject("select count(*) from T_USER", new HashMap(), Integer.class);
         assertEquals("Number of user expected different", 4, i.intValue());
