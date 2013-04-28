@@ -1,14 +1,27 @@
 package org.alessiodm.ringer.test.mvc.integration.web.api.v1.controller;
 
 import java.util.HashMap;
+import org.alessiodm.ringer.test.unit.web.api.v1.mock.MockAuthService;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class UserControllerTest extends AbstractMvcIntegrationControllerTest {
+    
+    @Autowired
+    MockAuthService mockAuthService;
+    
+    @Before
+    @Override
+    public void setUp(){
+        super.setUp();
+        mockAuthService.reset();
+    }
     
     @Test
     public void testUserRegistration() throws Exception {

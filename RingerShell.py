@@ -73,14 +73,12 @@ def login():
 		password = getpass.getpass("Insert password: ")
 
 		conn = http.HTTPConnection(RINGER_API_HOST)
-		#conn.request('GET', '/api/v1/auth/token?', body) 
 		conn.request('GET', '/api/v1/auth/token?username={0}&password={1}'.format(username, password)) 
 		resp = conn.getresponse()
 		content = resp.read()
 		data = json.loads(content)
 		TOKEN = data["token"]
-		print "Status: " + xstr(resp.status)
-		print "Token: " + TOKEN
+		print "HTTP Response " + xstr(resp.status) + ": " + content
 
 def logout():
 	global TOKEN
@@ -114,7 +112,18 @@ def registerNewUser():
 
 
 def unregister():
-	print "UNREG"
+	global TOKEN
+	if TOKEN:
+		conn = http.HTTPConnection(RINGER_API_HOST)
+		conn.request('DELETE', '/api/v1/secure/user/delete?token={0}'.format(TOKEN)) 
+		resp = conn.getresponse()
+		content = resp.read()
+		data = json.loads(content)
+		TOKEN = None
+		print "HTTP Response " + xstr(resp.status) + ": " + content
+	else:
+		print "Do login and get a token first"
+		return
 
 def ringOut():
 	print "RING"

@@ -1,8 +1,11 @@
 package org.alessiodm.ringer.web.api.v1.controller;
 
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 import org.alessiodm.ringer.web.api.v1.dto.AuthToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +34,14 @@ public class AuthController extends BaseController {
      */
     @RequestMapping(value = "/api/v1/auth/token", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
     public @ResponseBody AuthToken getToken(@RequestParam(value = "username", required = true) String username,
-                                            @RequestParam(value = "password", required = true) String password){
+                                            @RequestParam(value = "password", required = true) String password,
+                                            HttpServletResponse response) throws IOException{
         String token = authService.createTokenForUser(username, password);
+        if (token == null){
+            response.sendError(HttpStatus.UNAUTHORIZED.value(), "Unauthorized");
+        }
         return new AuthToken(token);
+        
     }
     
     @RequestMapping(value = "/api/v1/secure/auth/invalidateToken", method = RequestMethod.GET)

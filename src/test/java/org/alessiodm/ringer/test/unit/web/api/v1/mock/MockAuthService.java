@@ -6,7 +6,20 @@ import org.alessiodm.ringer.web.api.v1.auth.AuthService;
 public class MockAuthService implements AuthService {
 
     private User validateUser;
-    private String token = "abcdef";
+    private String token;
+    
+    public MockAuthService(){
+        reset();
+    }
+    
+    public final void reset(){
+        token = "abcdef";
+        User u = new User();
+        u.setId(10L);
+        u.setUsername("user");
+        u.setEncPassword("xxx");
+        this.validateUser = u;
+    }
     
     @Override
     public String createTokenForUser(String username, String password) {
@@ -23,6 +36,11 @@ public class MockAuthService implements AuthService {
         return validateUser;
     }
     
+    @Override
+    public String getUserToken(Long id) {
+        return token;
+    }
+    
     public User getValidateUser() {
         return validateUser;
     }
@@ -31,9 +49,12 @@ public class MockAuthService implements AuthService {
         this.validateUser = validateUser;
     }
 
-    @Override
-    public String getUserToken(Long id) {
+    public String getToken(){
         return token;
+    }
+    
+    public void setToken(String token){
+        this.token = token;
     }
     
 }
