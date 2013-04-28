@@ -28,7 +28,7 @@ public class User {
     @JsonIgnore
     private String encPassword;
     
-    private @Autowired UserRepository userRepository;
+    private @XmlTransient @Autowired UserRepository userRepository;
     
     public void startFollowing(User u){
         if (amIFollowing(u) == true){
