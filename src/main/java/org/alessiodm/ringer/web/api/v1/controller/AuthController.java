@@ -29,7 +29,7 @@ public class AuthController extends BaseController {
      * @param password User password
      * @return Authorization token
      */
-    @RequestMapping(value = "/api/v1/auth/token", produces = {"application/json", "application/xml"})
+    @RequestMapping(value = "/api/v1/auth/token", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
     public @ResponseBody AuthToken getToken(@RequestParam(value = "username", required = true) String username,
                                             @RequestParam(value = "password", required = true) String password){
         String token = authService.createTokenForUser(username, password);
