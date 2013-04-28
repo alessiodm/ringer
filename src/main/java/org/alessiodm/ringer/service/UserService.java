@@ -28,6 +28,7 @@ public class UserService {
     @Autowired 
     private RelationDao relationDao;
     
+    // Also this
     @Transactional
     public User getUserDetails(String username){
         User u = userDao.findByUsername(username);
@@ -37,6 +38,7 @@ public class UserService {
         return u;
     }
     
+    // Only method that remains
     @Transactional
     public User registerUser(String username, String password){
         User u = userDao.findByUsername(username);
