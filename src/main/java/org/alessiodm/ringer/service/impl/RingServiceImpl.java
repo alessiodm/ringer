@@ -7,9 +7,10 @@ import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.domain.repository.RingRepository;
 import org.alessiodm.ringer.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Service
 public class RingServiceImpl implements RingService {
 
     private @Autowired RingRepository ringRepository;

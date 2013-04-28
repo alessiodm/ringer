@@ -3,9 +3,7 @@ package org.alessiodm.ringer.service;
 import java.util.List;
 import org.alessiodm.ringer.domain.Ring;
 import org.alessiodm.ringer.domain.User;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface RingService {
 
     public Ring showRingDetails(Long ringId);

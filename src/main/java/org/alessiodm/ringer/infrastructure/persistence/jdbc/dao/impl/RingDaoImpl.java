@@ -6,16 +6,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.sql.DataSource;
 import org.alessiodm.ringer.domain.Ring;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
 
-public class RingDaoImpl extends NamedParameterJdbcDaoSupport implements RingDao {
+@Component
+@Scope(value="prototype")
+public class RingDaoImpl extends AbstractDaoImpl implements RingDao {
     
     private RowMapper<Ring> ringFullMapper = new RowMapper<Ring>() {
             @Override

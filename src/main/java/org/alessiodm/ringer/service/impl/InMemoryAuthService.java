@@ -6,8 +6,10 @@ import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @Scope(value="singleton")
 public class InMemoryAuthService implements AuthService {
 

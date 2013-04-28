@@ -2,9 +2,7 @@ package org.alessiodm.ringer.domain.repository;
 
 import java.util.List;
 import org.alessiodm.ringer.domain.User;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface UserRepository {
     
     public User findUserById(Long id);

@@ -5,6 +5,7 @@ import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  * @author alessio
  */
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired

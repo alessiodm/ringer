@@ -7,8 +7,10 @@ import org.alessiodm.ringer.domain.repository.RingRepository;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 public class RingRepositoryJdbc implements RingRepository {
 
     private @Autowired AutowireCapableBeanFactory beanFactory;
