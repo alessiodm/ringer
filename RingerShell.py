@@ -195,10 +195,38 @@ def showUser():
 		return
 
 def listFollowers():
-	print "UNFOLLOW"
+	if TOKEN:
+		perPage = raw_input("Insert number of follower you want to see: ")
+		page = raw_input("Insert page you want to see: ")
+		conn = http.HTTPConnection(RINGER_API_HOST)
+		conn.request('GET', '/api/v1/secure/relations/followers/list?token={0}&page={1}&perPage={2}'.format(TOKEN, page, perPage)) 
+		resp = conn.getresponse()
+		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
+		print
+		data = json.loads(content)
+		for user in data["users"]:
+			print '{0} (ID = {1})'.format(user["username"], user["id"])
+	else:
+		print "Do login and get a token first"
+		return
 
 def listFollowing():
-	print "UNFOLLOW"
+	if TOKEN:
+		perPage = raw_input("Insert number of following you want to see: ")
+		page = raw_input("Insert page you want to see: ")
+		conn = http.HTTPConnection(RINGER_API_HOST)
+		conn.request('GET', '/api/v1/secure/relations/following/list?token={0}&page={1}&perPage={2}'.format(TOKEN, page, perPage)) 
+		resp = conn.getresponse()
+		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
+		print
+		data = json.loads(content)
+		for user in data["users"]:
+			print '{0} (ID = {1})'.format(user["username"], user["id"])
+	else:
+		print "Do login and get a token first"
+		return
 
 def changeServer():
 	global RINGER_API_HOST

@@ -32,6 +32,10 @@ public class RingController extends BaseController {
         page = page == null ? 0 : page;
         perPage = perPage == null ? 10 : perPage;
         
+        if (keyword == null || keyword.trim().equals("")){
+            keyword = null;
+        }
+        
         // Business logic
         List<Ring> userRings = ringService.getRingsList(user.getId(), keyword, page, perPage);
         

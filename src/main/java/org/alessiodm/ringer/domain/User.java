@@ -4,13 +4,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.springframework.stereotype.Component;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
  * @author alessio
  */
-@Component
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User {
@@ -21,7 +21,9 @@ public class User {
     @XmlElement
     private String username;
     
-    private transient String encPassword;
+    @XmlTransient
+    @JsonIgnore
+    private String encPassword;
     
     public Long getId() {
         return id;
