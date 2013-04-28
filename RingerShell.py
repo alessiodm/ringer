@@ -141,10 +141,22 @@ def ringOut():
 		return
 
 def listRings():
-	print "LIST"
-
-def searchRings():
-	print "SEARCH"
+	if TOKEN:
+		perPage = raw_input("Insert number of rings you want to see: ")
+		page = raw_input("Insert page you want to see: ")
+		keyword = raw_input("Insert keyword to look for (optional): ")
+		conn = http.HTTPConnection(RINGER_API_HOST)
+		conn.request('GET', '/api/v1/secure/rings/list?token={0}&page={1}&perPage={2}&keyword={3}'.format(TOKEN, page, perPage, keyword)) 
+		resp = conn.getresponse()
+		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
+		print
+		data = json.loads(content)
+		for ring in data["rings"]:
+			print 'User with id {0} at {1} ringed out: "{2}"'.format(ring["userId"], ring["timestamp"], ring["content"])
+	else:
+		print "Do login and get a token first"
+		return
 
 def follow():
 	if TOKEN:
@@ -201,7 +213,6 @@ ops = {
 				"new ring": ringOut,
 				"show user": showUser,
 				"list rings": listRings,
-				"search": searchRings,
 				"follow": follow,
 				"unfollow": unfollow,
 				"list followers": listFollowers,
