@@ -19,6 +19,7 @@
     
     <!-- Controllers -->
     <context:component-scan base-package="org.alessiodm.ringer.web.api.v1.controllers" />
+    <context:component-scan base-package="org.alessiodm.ringer.infrastructure.persistence.jdbc" />
     
     <!-- Dao classes to autowire -->
     <bean id="userDaoImpl" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl.UserDaoImpl"> 
