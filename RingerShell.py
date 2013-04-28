@@ -29,8 +29,8 @@ def xstr(s):
 def main():
 	print
 	print "Ringer Shell (version {0})".format(RINGER_SHELL_VERSION)
+	print "Current server: " + RINGER_API_HOST
 	print "Type 'help' for command list ('exit' to terminate...)"
-	
 
 	choice = "__none__"
 	while choice != "exit":
@@ -76,9 +76,9 @@ def login():
 		conn.request('GET', '/api/v1/auth/token?username={0}&password={1}'.format(username, password)) 
 		resp = conn.getresponse()
 		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
 		data = json.loads(content)
 		TOKEN = data["token"]
-		print "HTTP Response " + xstr(resp.status) + ": " + content
 
 def logout():
 	global TOKEN
@@ -86,9 +86,9 @@ def logout():
 		conn = http.HTTPConnection(RINGER_API_HOST)
 		conn.request('GET', '/api/v1/secure/auth/invalidateToken?token={0}'.format(TOKEN)) 
 		resp = conn.getresponse()
+		print "HTTP Response " + xstr(resp.status)
 		content = resp.read()
 		TOKEN = None
-		print "HTTP Response " + xstr(resp.status)
 	else:
 		print "Do login and get a token first"
 		return
@@ -118,15 +118,27 @@ def unregister():
 		conn.request('DELETE', '/api/v1/secure/user/delete?token={0}'.format(TOKEN)) 
 		resp = conn.getresponse()
 		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
 		data = json.loads(content)
 		TOKEN = None
-		print "HTTP Response " + xstr(resp.status) + ": " + content
 	else:
 		print "Do login and get a token first"
 		return
 
 def ringOut():
-	print "RING"
+	if TOKEN:
+		headers = { "Content-Type" : "application/json" }
+		req = {}
+		req["content"] = raw_input("Insert your ring content: ")
+		req_body = json.dumps(req)
+		conn = http.HTTPConnection(RINGER_API_HOST)
+		conn.request('POST', '/api/v1/secure/rings/create?token={0}'.format(TOKEN), req_body, headers) 
+		resp = conn.getresponse()
+		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
+	else:
+		print "Do login and get a token first"
+		return
 
 def listRings():
 	print "LIST"
@@ -135,10 +147,28 @@ def searchRings():
 	print "SEARCH"
 
 def follow():
-	print "FOLLOW"
+	if TOKEN:
+		userIdToFollow = raw_input("Insert the ID of the user to follow: ")
+		conn = http.HTTPConnection(RINGER_API_HOST)
+		conn.request('POST', '/api/v1/secure/relations/following/add/{0}?token={1}'.format(userIdToFollow, TOKEN)) 
+		resp = conn.getresponse()
+		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
+	else:
+		print "Do login and get a token first"
+		return
 
 def unfollow():
-	print "UNFOLLOW"
+	if TOKEN:
+		userIdToFollow = raw_input("Insert the ID of the user to unfollow: ")
+		conn = http.HTTPConnection(RINGER_API_HOST)
+		conn.request('POST', '/api/v1/secure/relations/following/remove/{0}?token={1}'.format(userIdToFollow, TOKEN)) 
+		resp = conn.getresponse()
+		content = resp.read()
+		print "HTTP Response " + xstr(resp.status) + ": " + content
+	else:
+		print "Do login and get a token first"
+		return
 
 def listFollowers():
 	print "UNFOLLOW"
@@ -147,24 +177,23 @@ def listFollowing():
 	print "UNFOLLOW"
 
 def changeServer():
-	print "Change server"
-
-def help():
-	print "helo"
+	global RINGER_API_HOST
+	RINGER_API_HOST = raw_input("Insert new server host: ")
+	print "Server changed, current server: " + RINGER_API_HOST
 
 ops = { 
 				"login": login,
 				"logout": logout,
 				"register": registerNewUser,
 				"unregister": unregister,
-				"ringOut": ringOut,
+				"new ring": ringOut,
 				"list rings": listRings,
 				"search": searchRings,
 				"follow": follow,
 				"unfollow": unfollow,
 				"list followers": listFollowers,
 				"list following": listFollowing,
-				"changeServer": changeServer,
+				"change server": changeServer,
 				"help": printHelp
 			 }
 

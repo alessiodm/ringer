@@ -41,4 +41,8 @@ public class UserController extends BaseController {
         return new SimpleResult(ResultType.OKEY, "User deleted");
     }
 
+    @RequestMapping(value = "/api/v1/secure/user/show/{username}", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
+    public @ResponseBody User show(@PathVariable String username){
+        return userService.getUserDetails(username);
+    }
 }

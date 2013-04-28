@@ -21,8 +21,7 @@ public class User {
     @XmlElement
     private String username;
     
-    @XmlElement
-    private String encPassword;
+    private transient String encPassword;
     
     public Long getId() {
         return id;
