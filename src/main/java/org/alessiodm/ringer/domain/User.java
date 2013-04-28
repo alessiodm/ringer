@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@Component
 public class User {
     
     @XmlElement

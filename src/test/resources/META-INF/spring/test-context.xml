@@ -19,7 +19,8 @@
     
     <!-- Controllers -->
     <context:component-scan base-package="org.alessiodm.ringer.web.api.v1.controllers" />
-    <context:component-scan base-package="org.alessiodm.ringer.infrastructure.persistence.jdbc" />
+    <context:component-scan base-package="org.alessiodm.ringer.test.unit.web.api.v1.mock" />
+    <context:component-scan base-package="org.alessiodm.ringer.domain" />
     
     <!-- Dao classes to autowire -->
     <bean id="userDaoImpl" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.impl.UserDaoImpl"> 
@@ -32,9 +33,9 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
-    <bean id="userRepo" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.UserRepositoryJdbc"/> 
-    <bean id="ringRepo" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.RingRepositoryJdbc"/>  
-                
+    <bean id="userRepository" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.UserRepositoryJdbc"/> 
+    <bean id="ringRepository" class="org.alessiodm.ringer.infrastructure.persistence.jdbc.RingRepositoryJdbc"/>  
+          
     <!-- Configuring embedded datasource and declarative annotation-driven transactions -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

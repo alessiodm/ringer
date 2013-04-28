@@ -7,8 +7,10 @@ import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 public class UserRepositoryJdbc implements UserRepository {
 
     private @Autowired AutowireCapableBeanFactory beanFactory;
@@ -19,6 +21,9 @@ public class UserRepositoryJdbc implements UserRepository {
     @Override
     public User findUserById(Long id) {
         User u = userDao.findById(id);
+        if (u == null) {
+            return null;
+        }
         beanFactory.autowireBean(u);
         return u;
     }
@@ -26,6 +31,9 @@ public class UserRepositoryJdbc implements UserRepository {
     @Override
     public User findUserByUsername(String username) {
         User u = userDao.findByUsername(username);
+        if (u == null) {
+            return null;
+        }
         beanFactory.autowireBean(u);
         return u;
     }
@@ -56,6 +64,9 @@ public class UserRepositoryJdbc implements UserRepository {
     @Override
     @Transactional public User createUser(String username, String password) {
         User u = userDao.createUser(username, password);
+        if (u == null) {
+            return null;
+        }
         beanFactory.autowireBean(u);
         return u;
     }
@@ -73,5 +84,10 @@ public class UserRepositoryJdbc implements UserRepository {
     @Override
     public boolean follows(User u1, User u2){
         return relationDao.follows(u1.getId(), u2.getId());
+    }
+
+    @Override
+    public User findUserByUsernameAndPassword(String username, String password) {
+        return userDao.lookupUserByCredentials(username, password);
     }
 }

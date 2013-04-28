@@ -1,15 +1,24 @@
 package org.alessiodm.ringer.test.unit.web.api.v1.mock;
 
+import javax.annotation.PostConstruct;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.web.api.v1.auth.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 public class MockAuthService implements AuthService {
 
+    private @Autowired AutowireCapableBeanFactory beanFactory;
+    
     private User validateUser;
     private String token;
     
     public MockAuthService(){
-        reset();
+    }
+    
+    @PostConstruct
+    public void initialize() {
+       reset();
     }
     
     public final void reset(){
@@ -18,6 +27,7 @@ public class MockAuthService implements AuthService {
         u.setId(10L);
         u.setUsername("user");
         u.setEncPassword("xxx");
+        beanFactory.autowireBean(u);
         this.validateUser = u;
     }
     

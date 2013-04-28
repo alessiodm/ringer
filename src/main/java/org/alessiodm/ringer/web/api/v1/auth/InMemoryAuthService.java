@@ -1,8 +1,8 @@
 package org.alessiodm.ringer.web.api.v1.auth;
 
 import java.util.concurrent.ConcurrentHashMap;
-import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class InMemoryAuthService implements AuthService {
     private UUIDGenerator uuidGenerator;
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
     
     public InMemoryAuthService(){
         tokens.put("global1", -1L);
@@ -32,7 +32,7 @@ public class InMemoryAuthService implements AuthService {
             return null;
         }
         
-        User user = userDao.lookupUserByCredentials(username, password);
+        User user = userRepository.findUserByUsernameAndPassword(username, password);
         if (user == null){
             return null;
         }
@@ -77,7 +77,7 @@ public class InMemoryAuthService implements AuthService {
             return null;
         }
         
-        User user = userDao.findById(uid);
+        User user = userRepository.findUserById(uid);
         return user == null ? null : user;
     }
  
