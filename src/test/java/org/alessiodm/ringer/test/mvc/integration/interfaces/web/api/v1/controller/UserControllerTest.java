@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.test.mvc.integration.interfaces.web.api.v1.controller;
 
 import java.util.HashMap;
-import org.alessiodm.ringer.test.unit.interfaces.web.api.v1.mock.MockAuthService;
+import org.alessiodm.ringer.test.unit.service.impl.mock.MockAuthService;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;

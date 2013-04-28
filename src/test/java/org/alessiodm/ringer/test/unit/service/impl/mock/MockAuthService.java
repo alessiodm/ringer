@@ -1,4 +1,4 @@
-package org.alessiodm.ringer.test.unit.interfaces.web.api.v1.mock;
+package org.alessiodm.ringer.test.unit.service.impl.mock;
 
 import javax.annotation.PostConstruct;
 import org.alessiodm.ringer.domain.User;
