@@ -12,6 +12,11 @@
     <!-- Just in case we would like to use properties and change environment -->
     <context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
 
+    <!--
+        AspectJ @Configurable support => auto-weaved/dep-injected domain objects
+    -->
+    <context:spring-configured/>
+
     <context:component-scan base-package="org.alessiodm.ringer">
         <!-- Everything except @Controller annotated classes -->
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>

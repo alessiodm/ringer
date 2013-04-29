@@ -20,9 +20,15 @@
     <bean id="userService" class="org.alessiodm.ringer.service.impl.UserServiceImpl"/>
     <bean id="ringService" class="org.alessiodm.ringer.service.impl.RingServiceImpl"/>
     
+    <!--
+        AspectJ @Configurable support => auto-weaved/dep-injected domain objects
+    -->
+    <context:spring-configured />
+    
     <!-- Auto-scanned components -->
     <context:component-scan base-package="org.alessiodm.ringer.interfaces.web.api.v1.controllers" />
     <context:component-scan base-package="org.alessiodm.ringer.infrastructure" />
+    <context:component-scan base-package="org.alessiodm.ringer.domain" />
           
     <!-- Configuring embedded datasource and declarative annotation-driven transactions -->
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

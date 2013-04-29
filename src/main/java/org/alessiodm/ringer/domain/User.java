@@ -3,9 +3,9 @@ package org.alessiodm.ringer.domain;
 import java.util.List;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Configurable;
 
-@Component
+@Configurable
 public class User {
     
     private Long id;

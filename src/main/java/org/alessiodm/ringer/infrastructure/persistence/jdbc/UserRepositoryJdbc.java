@@ -6,35 +6,24 @@ import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserRepositoryJdbc implements UserRepository {
 
-    private @Autowired AutowireCapableBeanFactory beanFactory;
-    
     protected @Autowired UserDao userDao;
     protected @Autowired RelationDao relationDao;
     
     @Override
     public User findUserById(Long id) {
         User u = userDao.findById(id);
-        if (u == null) {
-            return null;
-        }
-        beanFactory.autowireBean(u);
         return u;
     }
 
     @Override
     public User findUserByUsername(String username) {
         User u = userDao.findByUsername(username);
-        if (u == null) {
-            return null;
-        }
-        beanFactory.autowireBean(u);
         return u;
     }
 
@@ -46,28 +35,18 @@ public class UserRepositoryJdbc implements UserRepository {
     @Override
     public List<User> getFollowers(User u, int page, int perPage) {
         List<User> users = relationDao.listFollowers(u.getId(), page, perPage);
-        for (User _u : users){
-            beanFactory.autowireBean(_u);
-        }
         return users;
     }
 
     @Override
     public List<User> getFollowing(User u, int page, int perPage) {
         List<User> users = relationDao.listFollowing(u.getId(), page, perPage);
-        for (User _u : users){
-            beanFactory.autowireBean(_u);
-        }
         return users;
     }
 
     @Override
     @Transactional public User createUser(String username, String password) {
         User u = userDao.createUser(username, password);
-        if (u == null) {
-            return null;
-        }
-        beanFactory.autowireBean(u);
         return u;
     }
     
