@@ -15,7 +15,7 @@ import json
 import traceback
 
 RINGER_SHELL_VERSION = "0.1.0"
-RINGER_API_HOST = 'ringer-sta.herokuapp.com'
+RINGER_API_HOST = 'ringer-pro.herokuapp.com'
 TOKEN = None
 
 

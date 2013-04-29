@@ -34,6 +34,11 @@
         <property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/>
         <property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/>
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!-- TODO: Fine tuning data source-->
+        <property name="initialSize" value="1" />
+        <property name="maxActive" value="15" />
+        <property name="maxWait" value="5000" />
+        <property name="maxIdle" value="1" />
     </bean>
    
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
