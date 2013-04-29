@@ -1,8 +1,8 @@
 package org.alessiodm.ringer.service;
 
 import java.util.List;
-import org.alessiodm.ringer.domain.Ring;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.Ring;
+import org.alessiodm.ringer.domain.model.User;
 
 public interface RingService {
 

@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.test.mvc.integration.interfaces.web.api.v1.controller;
 
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.test.unit.service.impl.mock.MockAuthService;
 import org.junit.Before;
 import org.junit.Test;

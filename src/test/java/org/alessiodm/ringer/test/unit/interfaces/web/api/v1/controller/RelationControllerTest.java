@@ -2,8 +2,8 @@ package org.alessiodm.ringer.test.unit.interfaces.web.api.v1.controller;
 
 import java.util.HashMap;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
-import org.alessiodm.ringer.domain.User;
-import org.alessiodm.ringer.domain.RingerException;
+import org.alessiodm.ringer.domain.model.User;
+import org.alessiodm.ringer.domain.model.handling.RingerException;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.interfaces.web.api.v1.controller.RelationController;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.ListOfUserDetail;

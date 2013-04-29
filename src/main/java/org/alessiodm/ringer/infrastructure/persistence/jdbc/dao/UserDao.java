@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.infrastructure.persistence.jdbc.dao;
 
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 
 public interface UserDao {
     

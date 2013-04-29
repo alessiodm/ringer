@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -26,7 +26,7 @@ public class ListOfUserDetail {
     public void convertFromUserList(List<User> users){
         this.users = new ArrayList<UserDTO>(users.size());
         for (User u : users){
-            this.users.add(new UserDTO(u.getId(), u.getUsername()));
+            this.users.add(new UserDTO(u));
         }
     }
 }

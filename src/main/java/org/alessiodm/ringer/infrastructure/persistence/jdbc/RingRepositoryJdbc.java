@@ -1,8 +1,8 @@
 package org.alessiodm.ringer.infrastructure.persistence.jdbc;
 
 import java.util.List;
-import org.alessiodm.ringer.domain.Ring;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.Ring;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.domain.repository.RingRepository;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.springframework.beans.factory.annotation.Autowired;

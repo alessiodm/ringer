@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.alessiodm.ringer.domain.model.User;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,9 +19,9 @@ public class UserDTO {
     public UserDTO(){
     }
     
-    public UserDTO(Long id, String username){
-        this.id = id;
-        this.username = username;
+    public UserDTO(User u){
+        this.id = u.getId();
+        this.username = u.getUsername();
     }
 
     public Long getId() {

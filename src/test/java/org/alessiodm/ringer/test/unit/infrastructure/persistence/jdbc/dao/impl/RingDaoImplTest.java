@@ -2,7 +2,7 @@ package org.alessiodm.ringer.test.unit.infrastructure.persistence.jdbc.dao.impl;
 
 import java.util.List;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
-import org.alessiodm.ringer.domain.Ring;
+import org.alessiodm.ringer.domain.model.Ring;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +39,19 @@ public class RingDaoImplTest extends AbstractDaoTest {
         ringDao.deleteRing(1L);
         Ring ring = ringDao.findById(1L);
         assertNull("Expected null", ring);
+    }
+    
+    @Test
+    public void testDeleteAllUserRings(){
+        int deleted = ringDao.deleteAllUserRings(1L);
+        assertEquals(3, deleted);
+        // TODO: Check database
+    }
+    
+    @Test
+    public void testDeleteAllUserRingContents(){
+        int deleted = ringDao.deleteAllUserRingContents(1L);
+        assertEquals(3, deleted);
     }
     
     @Test 

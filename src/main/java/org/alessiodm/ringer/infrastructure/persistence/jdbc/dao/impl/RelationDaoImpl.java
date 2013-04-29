@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.RowMapper;
@@ -97,6 +97,13 @@ public class RelationDaoImpl extends AbstractDaoImpl implements RelationDao {
         parameters.put("offset", offset);
             
         return getNamedParameterJdbcTemplate().query(sql, parameters, userFullMapper);
+    }
+
+    @Override
+    public int deleteAllUserRelation(Long userId) {
+        Map<String, Object> parameters = new HashMap<String, Object>(1);
+        parameters.put("userId", userId);
+        return getNamedParameterJdbcTemplate().update("delete from T_RELATION where follower_id = :userId or followed_id = :userId", parameters);
     }
     
 }

@@ -1,12 +1,12 @@
 SET storage_engine=INNODB;
 
- -- Dropping tables: pay attention to order for FK
-drop table if exists T_RING_CONTENT;
-drop table if exists T_RELATION;
-drop table if exists T_RING;
-drop table if exists T_USER;
+-- Dropping tables: pay attention to order for FK
+DROP TABLE IF EXISTS T_RING_CONTENT;
+DROP TABLE IF EXISTS T_RELATION;
+DROP TABLE IF EXISTS T_RING;
+DROP TABLE IF EXISTS T_USER;
 
-create table T_USER (
+CREATE TABLE T_USER (
     `ID` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `USERNAME` VARCHAR(255) UNIQUE NOT NULL,
     `ENC_PASSWORD` VARCHAR(255) NOT NULL,
@@ -14,7 +14,7 @@ create table T_USER (
     PRIMARY KEY (`ID`)
 );
 
-create table T_RING (
+CREATE TABLE T_RING (
     `ID` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `USER_ID` BIGINT UNSIGNED NOT NULL,
     `TIMESTAMP` TIMESTAMP NOT NULL,
@@ -23,7 +23,7 @@ create table T_RING (
     FOREIGN KEY (`USER_ID`) REFERENCES T_USER(`ID`) ON DELETE CASCADE
 );
 
-create table T_RELATION (
+CREATE TABLE T_RELATION (
     `FOLLOWER_ID` BIGINT UNSIGNED NOT NULL,
     `FOLLOWED_ID` BIGINT UNSIGNED NOT NULL,
 
@@ -32,7 +32,7 @@ create table T_RELATION (
     FOREIGN KEY (`FOLLOWED_ID`) REFERENCES T_USER(`ID`) ON DELETE CASCADE
 );
 
-create table T_RING_CONTENT (
+CREATE TABLE T_RING_CONTENT (
     `ID` BIGINT UNSIGNED NOT NULL, -- ringId
     `CONTENT` VARCHAR(255) NOT NULL,
     
@@ -40,6 +40,25 @@ create table T_RING_CONTENT (
     FULLTEXT INDEX `ft_ring_content` (`CONTENT` ASC)
 ) ENGINE MYISAM;
 
+/*
+-- We could use a trigger to act as a FK on delete cascade.
+-- We cannot use FK from a InnoDB table towards a MyISAM one.
+DELIMITER $$
+
+CREATE TRIGGER `TR_DELETE_RING_CONTENT`
+AFTER DELETE ON `T_RING`
+FOR EACH ROW
+BEGIN
+    DELETE FROM T_RING_CONTENT 
+        WHERE T_RING_CONTENT.ID = OLD.ID;
+END
+
+$$
+
+DELIMITER ;
+*/
+
+-- POPULATE WITH SOME DATA
 INSERT INTO T_USER (ID, USERNAME, ENC_PASSWORD) VALUES (1, 'user1', '18aab3392031eab3c193e9f24ed43897'); -- Pass=user1
 INSERT INTO T_USER (ID, USERNAME, ENC_PASSWORD) VALUES (2, 'user2', 'b1f4cdf12f5cfc7b8995e7c6a925d456'); -- Pass=user2
 

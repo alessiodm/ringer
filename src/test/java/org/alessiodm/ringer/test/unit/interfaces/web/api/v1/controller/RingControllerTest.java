@@ -1,14 +1,13 @@
 package org.alessiodm.ringer.test.unit.interfaces.web.api.v1.controller;
 
 import java.util.HashMap;
-import org.alessiodm.ringer.domain.Ring;
-import org.alessiodm.ringer.domain.RingerException;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
+import org.alessiodm.ringer.domain.model.handling.RingerException;
 import org.alessiodm.ringer.domain.repository.UserRepository;
-import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.alessiodm.ringer.interfaces.web.api.v1.controller.RingController;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.ListOfRings;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.RingContent;
+import org.alessiodm.ringer.interfaces.web.api.v1.dto.RingDTO;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.SimpleResult;
 import org.apache.log4j.Logger;
 import static org.junit.Assert.*;
@@ -44,7 +43,7 @@ public class RingControllerTest extends AbstractUnitControllerTest {
     
     @Test
     public void testShowRing(){
-        Ring ring = ringController.showRing(2L, u1);
+        RingDTO ring = ringController.showRing(2L, u1);
         assertEquals("Ring 2 User 1", ring.getContent());
     }
     

@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.interfaces.web.api.v1.controller;
 
 import java.util.List;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.ListOfUserDetail;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.SimpleResult;
 import org.alessiodm.ringer.service.UserService;

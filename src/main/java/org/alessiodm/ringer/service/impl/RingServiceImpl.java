@@ -1,9 +1,9 @@
 package org.alessiodm.ringer.service.impl;
 
 import java.util.List;
-import org.alessiodm.ringer.domain.Ring;
-import org.alessiodm.ringer.domain.RingerException;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.Ring;
+import org.alessiodm.ringer.domain.model.handling.RingerException;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.domain.repository.RingRepository;
 import org.alessiodm.ringer.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ public class RingServiceImpl implements RingService {
     private @Autowired RingRepository ringRepository;
     
     @Transactional
+    @Override
     public Ring showRingDetails(Long ringId){
         return ringRepository.findRingById(ringId);
     }
@@ -28,6 +29,7 @@ public class RingServiceImpl implements RingService {
      * @return The Ring
      */
     @Transactional
+    @Override
     public Ring createRing(User u, String content){
         return ringRepository.createRing(u, content);
     }
@@ -41,6 +43,7 @@ public class RingServiceImpl implements RingService {
      * @return Delete result
      */
     @Transactional
+    @Override
     public int deleteUserRing(Ring r, User u){
         if (!r.belongsTo(u)){
             throw RingerException.NOT_USERS_RING;
@@ -49,6 +52,7 @@ public class RingServiceImpl implements RingService {
     }
     
     @Transactional
+    @Override
     public List<Ring> getRingsList(User u, String keyword, int page, int perPage){
         return ringRepository.getRingsList(u, keyword, page, perPage);
     }

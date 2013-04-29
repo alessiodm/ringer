@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.test.unit.service.impl.mock;
 
 import javax.annotation.PostConstruct;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.service.AuthService;
 
 public class MockAuthService implements AuthService {

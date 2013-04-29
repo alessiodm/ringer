@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.alessiodm.ringer.domain.Ring;
+import org.alessiodm.ringer.domain.model.Ring;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.RowMapper;
@@ -135,6 +135,21 @@ public class RingDaoImpl extends AbstractDaoImpl implements RingDao {
         Integer count = getNamedParameterJdbcTemplate().queryForObject(sql, parameters, Integer.class);
         
         return (count != null && count > 0);
+    }
+
+    @Override
+    public int deleteAllUserRingContents(Long userId) {
+        String sql = "delete from T_RING_CONTENT where id not in ( select id from T_RING where user_id != :userId )";
+        Map<String, Object> parameters = new HashMap<String, Object>(1);
+        parameters.put("userId", userId);
+        return getNamedParameterJdbcTemplate().update(sql, parameters);
+    }
+
+    @Override
+    public int deleteAllUserRings(Long userId) {
+        Map<String, Object> parameters = new HashMap<String, Object>(1);
+        parameters.put("userId", userId);
+        return getNamedParameterJdbcTemplate().update("delete from T_RING where user_id = :userId", parameters);
     }
 
 }

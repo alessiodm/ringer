@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.service.impl;
 
 import java.util.concurrent.ConcurrentHashMap;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;

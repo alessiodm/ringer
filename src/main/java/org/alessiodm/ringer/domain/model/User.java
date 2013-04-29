@@ -1,5 +1,6 @@
-package org.alessiodm.ringer.domain;
+package org.alessiodm.ringer.domain.model;
 
+import org.alessiodm.ringer.domain.model.handling.RingerException;
 import java.util.List;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.service;
 
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 
 /**
  * Not a very useful service, simply introducing some structure to the code

@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.test.unit.interfaces.web.api.v1.controller;
 
 import java.util.HashMap;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.interfaces.web.api.v1.controller.UserController;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.AuthToken;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.SimpleResult;

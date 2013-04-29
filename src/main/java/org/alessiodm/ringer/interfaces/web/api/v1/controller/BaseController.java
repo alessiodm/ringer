@@ -2,8 +2,8 @@ package org.alessiodm.ringer.interfaces.web.api.v1.controller;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
-import org.alessiodm.ringer.domain.User;
-import org.alessiodm.ringer.domain.RingerException;
+import org.alessiodm.ringer.domain.model.User;
+import org.alessiodm.ringer.domain.model.handling.RingerException;
 import org.alessiodm.ringer.service.AuthService;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.SimpleResult;
 import org.apache.log4j.Logger;

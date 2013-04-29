@@ -1,7 +1,8 @@
-package org.alessiodm.ringer.domain;
+package org.alessiodm.ringer.domain.model.handling;
 
 public class RingerException extends RuntimeException {
     
+    // Throw always same exception => optimization
     public static final RingerException USERNAME_NOT_AVAILABLE = 
             new RingerException("Username not available");
     

@@ -2,7 +2,7 @@ package org.alessiodm.ringer.test.unit.infrastructure.persistence.jdbc.dao.impl;
 
 import java.util.List;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +72,13 @@ public class RelationDaoImplTest extends AbstractDaoTest {
         relationDao.deleteRelation(1L, 4L);
         List<User> fwing = relationDao.listFollowing(1L, 0, 100);
         assertEquals("Expected no following", 0, fwing.size());
+    }
+    
+    @Test
+    public void testDeleteAllUserRelations(){
+        int deleted = relationDao.deleteAllUserRelation(1L);
+        assertEquals(6, deleted);
+        // TODO: Check database
     }
     
     @Test

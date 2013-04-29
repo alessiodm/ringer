@@ -1,7 +1,7 @@
 package org.alessiodm.ringer.service.impl;
 
-import org.alessiodm.ringer.domain.RingerException;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.handling.RingerException;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,16 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserRepository userRepository;
-     
+    
     @Transactional
+    @Override
     public User getUserById(Long id){
         User u = userRepository.findUserById(id);
         return u;
     }
     
     @Transactional
+    @Override
     public User getUserDetails(String username){
         User u = userRepository.findUserByUsername(username);
         if (u == null){
@@ -39,6 +41,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Transactional
+    @Override
     public User registerUser(String username, String password){
         User u = userRepository.findUserByUsername(username);
         if (u != null){
@@ -48,6 +51,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Transactional
+    @Override
     public int deleteUser(User u){
         String token = authService.getUserToken(u.getId());
         if (token != null){

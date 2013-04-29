@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.interfaces.web.api.v1.controller;
 
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.service.UserService;
 import org.alessiodm.ringer.service.AuthService;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.AuthToken;
@@ -45,7 +45,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/api/v1/secure/user/show/{username}", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
     public @ResponseBody UserDTO show(@PathVariable String username){
         User u = userService.getUserDetails(username);
-        UserDTO dto = new UserDTO(u.getId(), u.getUsername());
+        UserDTO dto = new UserDTO(u);
         return dto;
     }
 }

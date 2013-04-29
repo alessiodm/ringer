@@ -1,6 +1,6 @@
 package org.alessiodm.ringer.service;
 
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 
 /**
  * Simple auth service for Ringer application.

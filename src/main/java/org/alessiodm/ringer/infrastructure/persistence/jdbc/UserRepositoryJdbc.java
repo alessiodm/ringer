@@ -1,9 +1,10 @@
 package org.alessiodm.ringer.infrastructure.persistence.jdbc;
 
 import java.util.List;
-import org.alessiodm.ringer.domain.User;
+import org.alessiodm.ringer.domain.model.User;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
+import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,7 @@ public class UserRepositoryJdbc implements UserRepository {
 
     protected @Autowired UserDao userDao;
     protected @Autowired RelationDao relationDao;
+    protected @Autowired RingDao ringDao;
     
     @Override
     public User findUserById(Long id) {
@@ -29,6 +31,9 @@ public class UserRepositoryJdbc implements UserRepository {
 
     @Override
     @Transactional public int deleteUser(User user) {
+        ringDao.deleteAllUserRingContents(user.getId());
+        ringDao.deleteAllUserRings(user.getId());
+        relationDao.deleteAllUserRelation(user.getId());
         return userDao.deleteUser(user.getId());
     }
 
