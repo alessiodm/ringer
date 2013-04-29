@@ -1,6 +1,7 @@
 AuthToken
 ListOfRings
-ListOfUsers
+ListOfUserDetail
 RingContent
 SimpleResult
 UserCredentials
+UserDTO

@@ -7,6 +7,7 @@ import org.alessiodm.ringer.interfaces.web.api.v1.dto.AuthToken;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.SimpleResult;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.SimpleResult.ResultType;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.UserCredentials;
+import org.alessiodm.ringer.interfaces.web.api.v1.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,7 +43,9 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/api/v1/secure/user/show/{username}", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
-    public @ResponseBody User show(@PathVariable String username){
-        return userService.getUserDetails(username);
+    public @ResponseBody UserDTO show(@PathVariable String username){
+        User u = userService.getUserDetails(username);
+        UserDTO dto = new UserDTO(u.getId(), u.getUsername());
+        return dto;
     }
 }

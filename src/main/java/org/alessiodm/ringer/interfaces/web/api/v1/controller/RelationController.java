@@ -2,9 +2,9 @@ package org.alessiodm.ringer.interfaces.web.api.v1.controller;
 
 import java.util.List;
 import org.alessiodm.ringer.domain.User;
-import org.alessiodm.ringer.service.UserService;
-import org.alessiodm.ringer.interfaces.web.api.v1.dto.ListOfUsers;
+import org.alessiodm.ringer.interfaces.web.api.v1.dto.ListOfUserDetail;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.SimpleResult;
+import org.alessiodm.ringer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +20,7 @@ public class RelationController extends BaseController {
     private @Autowired UserService userService;
     
     @RequestMapping(value = "/api/v1/secure/relations/followers/list", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
-    public @ResponseBody ListOfUsers followersList(@RequestParam(value = "page", required = false) Integer page,
+    public @ResponseBody ListOfUserDetail followersList(@RequestParam(value = "page", required = false) Integer page,
                                                   @RequestParam(value = "perPage", required = false) Integer perPage,
                                                   @ModelAttribute("user") User user){
         page = page == null ? 0 : page;
@@ -28,13 +28,13 @@ public class RelationController extends BaseController {
         
         List<User> followers = user.getFollowers(page, perPage);
         
-        ListOfUsers list = new ListOfUsers();
-        list.setUsers(followers);
+        ListOfUserDetail list = new ListOfUserDetail();
+        list.convertFromUserList(followers);
         return list;
     }
     
     @RequestMapping(value = "/api/v1/secure/relations/following/list", method = RequestMethod.GET, produces = {"application/json", "application/xml"})
-    public @ResponseBody ListOfUsers followingList(@RequestParam(value = "page", required = false) Integer page,
+    public @ResponseBody ListOfUserDetail followingList(@RequestParam(value = "page", required = false) Integer page,
                                                   @RequestParam(value = "perPage", required = false) Integer perPage,
                                                   @ModelAttribute("user") User user){
         page = page == null ? 0 : page;
@@ -42,8 +42,8 @@ public class RelationController extends BaseController {
         
         List<User> followers = user.getFollowing(page, perPage);
                 
-        ListOfUsers list = new ListOfUsers();
-        list.setUsers(followers);
+        ListOfUserDetail list = new ListOfUserDetail();
+        list.convertFromUserList(followers);
         return list;
     }
 

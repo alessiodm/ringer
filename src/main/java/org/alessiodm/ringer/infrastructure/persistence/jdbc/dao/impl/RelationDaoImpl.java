@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.sql.DataSource;
 import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RelationDao;
 import org.springframework.context.annotation.Scope;

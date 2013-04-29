@@ -1,36 +1,18 @@
 package org.alessiodm.ringer.domain;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import org.alessiodm.ringer.domain.repository.UserRepository;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- *
- * @author alessio
- */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @Component
 public class User {
     
-    @XmlElement
     private Long id;
-    
-    @XmlElement
     private String username;
-    
-    @XmlTransient
-    @JsonIgnore
     private String encPassword;
     
-    private @XmlTransient @Autowired UserRepository userRepository;
+    private @Autowired UserRepository userRepository;
     
     public void startFollowing(User u){
         if (amIFollowing(u) == true){

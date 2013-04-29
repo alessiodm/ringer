@@ -6,7 +6,7 @@ import org.alessiodm.ringer.domain.User;
 import org.alessiodm.ringer.domain.RingerException;
 import org.alessiodm.ringer.domain.repository.UserRepository;
 import org.alessiodm.ringer.interfaces.web.api.v1.controller.RelationController;
-import org.alessiodm.ringer.interfaces.web.api.v1.dto.ListOfUsers;
+import org.alessiodm.ringer.interfaces.web.api.v1.dto.ListOfUserDetail;
 import org.alessiodm.ringer.interfaces.web.api.v1.dto.SimpleResult;
 import org.apache.log4j.Logger;
 import static org.junit.Assert.*;
@@ -33,7 +33,7 @@ public class RelationControllerTest extends AbstractUnitControllerTest {
     
     @Test
     public void testGetFollowers(){
-        ListOfUsers f = relController.followersList(0, 2, u1);
+        ListOfUserDetail f = relController.followersList(0, 2, u1);
         assertEquals(2, f.getUsers().size());
         assertEquals(2L, f.getUsers().get(0).getId().longValue());
         assertEquals(3L, f.getUsers().get(1).getId().longValue());
@@ -45,7 +45,7 @@ public class RelationControllerTest extends AbstractUnitControllerTest {
     
     @Test
     public void testGetFollowing(){
-        ListOfUsers f = relController.followingList(0, 2, u1);
+        ListOfUserDetail f = relController.followingList(0, 2, u1);
         assertEquals(2, f.getUsers().size());
         assertEquals(2L, f.getUsers().get(0).getId().longValue());
         assertEquals(3L, f.getUsers().get(1).getId().longValue());

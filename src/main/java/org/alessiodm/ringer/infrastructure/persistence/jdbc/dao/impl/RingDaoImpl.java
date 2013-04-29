@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.sql.DataSource;
 import org.alessiodm.ringer.domain.Ring;
 import org.alessiodm.ringer.infrastructure.persistence.jdbc.dao.RingDao;
 import org.springframework.context.annotation.Scope;
