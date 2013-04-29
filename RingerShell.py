@@ -39,7 +39,7 @@ def main():
 			if choice == "exit": break
 			dispatchOp(choice)
 		except:
-			traceback.print_exc()
+			#traceback.print_exc()
 			print "Runtime error, please try again..."
 	
 	print "Good bye!"
