@@ -1,4 +1,4 @@
-ringer
+Ringer
 ======
 
 A Twitter-like application
